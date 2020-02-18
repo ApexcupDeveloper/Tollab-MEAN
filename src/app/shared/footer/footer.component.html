@@ -1,0 +1,57 @@
+<ion-footer>
+    <ion-toolbar class="footer-toolbar">
+        <ion-grid class="ion-padding">
+            <ion-row class="ion-padding">
+                <ion-col size="auto">
+                    <img class="logo-white" src="../../../assets/logo/white_logo_transparent_background.png"
+                         alt="Tollab White Logo">
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <!--
+                <ion-col size="auto">
+                  <ul class="footer-list">
+                    <h4>Company</h4>
+                    <li><a>About Us</a></li>
+                    <li><a>Privacy Policy</a></li>
+                    <li><a>Terms and Conditions</a></li>
+                  </ul>
+                </ion-col>
+                -->
+                <ion-col size="auto">
+                    <ul class="footer-list">
+                        <li><h4>{{ 'footer.support' | translate }}</h4></li>
+                        <li><a routerLink="../home" fragment="contact">{{ 'footer.contactUs' | translate }}</a></li>
+                    </ul>
+                </ion-col>
+                <ion-col class="find-us">
+                    <ion-grid>
+                        <ion-row class="ion-justify-content-end">
+                            <div>{{ 'footer.findUs' | translate }}</div>
+                            <ion-col size="auto" class="ion-margin-top ion-padding-top">
+                                <div>
+                                    <a href="https://www.facebook.com/tollabME/" target="_blank">
+                                        <ion-icon name="logo-facebook"></ion-icon>
+                                    </a>
+                                    <a href="https://www.linkedin.com/company/tollabme" target="_blank">
+                                        <ion-icon name="logo-linkedin"></ion-icon>
+                                    </a>
+                                </div>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-between">
+                <ion-col size="auto">
+                    <h5>{{ ( 'footer.tollab'  | translate )+'&copy; 2019. ' + ('footer.copyRights' | translate) }}</h5>
+                </ion-col>
+                <ion-col size="auto">
+                    <h5>{{ 'footer.madeWith' | translate }}
+                        <ion-icon color="danger" name="heart"></ion-icon>
+                        {{ 'footer.inPalestine' | translate }}</h5>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+</ion-footer>

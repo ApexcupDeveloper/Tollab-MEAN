@@ -1,0 +1,263 @@
+<app-nav-bar></app-nav-bar>
+
+<ion-content>
+  <div class="container" style="margin: 0px auto; padding: 0px;">
+    <div class="post-header">
+      <h3><span class="label label-default">New Job</span></h3>
+    </div>
+    <div class="divider"></div>
+    <form name="form" action="#" onsubmit="">
+    <div class="post-body">
+      <div id="slide-post" class="carousel slide" data-ride="carousel" data-wrap="false" data-interval="false">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="card bg-light text-dark" style="width:100%;">
+              <div class="card-body">
+                <div class="radio-group">
+                  <p>Where should students submit their application?</p>
+                  <select class="form-control" [(ngModel)]="submit_place" id="sel"  [ngModelOptions]="{standalone: true}" required>
+                    <option value="tollab">Apply in Tollab</option>
+                    <option value="external-system">Apply through external system</option>
+                  </select>
+                  <!-- <span ng-show="!submit_place.length">Please enter something!</span> -->
+                </div>
+                <div class="radio-group">
+                  <p for="usr">Job title:</p>
+                  <input type="text" class="form-control" [(ngModel)]="job_title"  [ngModelOptions]="{standalone: true}" id="title" required>
+                </div>
+                <div class="radio-group">
+                  <p>Display your contact information to students?</p>
+                  <select class="form-control" [(ngModel)]="show_info"  [ngModelOptions]="{standalone: true}" id="sel1" required>
+                    <option value="name">Name Only</option>
+                    <option value="no-show">Don't show my info</option>
+                  </select>
+                </div>
+                <div class="radio-group">
+                  <p>Job Type</p>
+                  <select class="form-control" [(ngModel)]="job_type"  [ngModelOptions]="{standalone: true}" id="sel1" required>
+                    <option value="internship">Internship</option>
+                    <option value="education">Cooperative Education</option>
+                    <option value="experiential">Experiential Learning</option>
+                    <option value="campus">On campus Student Employment</option>
+                    <option value="fellowship">Fellowship</option>
+                    <option value="graduate">Graduate School</option>
+                    <option value="job">Job</option>
+                    <option value="volunter">Volunter</option>
+                  </select>
+                </div>
+                <div class="radio-group">
+                  <p>Employment Type</p>
+                  <select class="form-control" [(ngModel)]="employment_type"  [ngModelOptions]="{standalone: true}" id="sel1" required>
+                    <option value="full-time">Full - Time</option>
+                    <option value="part-time">Part - Time</option>
+                  </select>
+                </div>
+                <div class="radio-group">
+                  <p>Duration</p>
+                  <select class="form-control" [(ngModel)]="duration" id="sel1" [ngModelOptions]="{standalone: true}" required>
+                    <option value="permanent">Permanent</option>
+                    <option value="temporary">Temporary / Seasonal</option>
+                  </select>
+                </div>
+                <div class="radio-group">
+                  <p>Is this a Work Study job?</p>
+                  <p style="color: gray; font-weight:initial;">Work study jobs are for eligible students only.</p>
+                  <select class="form-control" [(ngModel)]="study_job"  [ngModelOptions]="{standalone: true}" id="sel1" required>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card bg-light text-dark" style="width:100%;">
+              <div class="card-body">
+                <div class="col">
+                  <div class="md-form">
+                    <label class="form10" for="form10">
+                      <i class="fas fa-pencil-alt prefix" style="margin-right: 5px;"></i>Description
+                    </label>
+                    <textarea id="form10" class="md-textarea form-control" [(ngModel)]="description"  [ngModelOptions]="{standalone: true}"
+                      rows="7" required></textarea>
+                    <label for="form12">You can copy and paste a description directly from your website</label>
+                  </div>
+                </div>
+                <div class="col">
+                  <label class="form10" for="form10">Job role(e)</label>
+                  <input class="form-control" [(ngModel)]="job_role"  [ngModelOptions]="{standalone: true}" id="role" required/>
+                  <label for="form12">
+                    Job roles are search facets for students who are looking for a certain type of work. Your
+                    selection(s) will help the students interested in these roles find your jobs.
+                  </label>
+                </div>
+                <div class="col">
+                  <label class="form10" for="form10">How many students do you have expect to hire for this
+                    position</label>
+                  <input class="form-control" [(ngModel)]="student_number"  [ngModelOptions]="{standalone: true}" id="number" required />
+                  <label for="form12">
+                    This number can be approximate and will not be displayed to students.
+                  </label>
+                </div>
+                <div class="col">
+                  <label class="form10" for="form10">Approximate salary</label>
+                  <input class="form-control" [(ngModel)]="salary"  [ngModelOptions]="{standalone: true}" id="role" required/>
+                  <label for="form12">
+                    Enter a number, not a range. Specifying a salary value is optional.
+                  </label>
+                </div>
+                <div class="col">
+                  <label class="form10" for="form10">Job location</label>
+                  <input class="form-control" [(ngModel)]="job_location"  [ngModelOptions]="{standalone: true}" id="role" required/>
+                </div>
+                <div class="col">
+                  <label class="form10" for="form10" style="margin-top: 10px;">Required documents</label>
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" [(ngModel)]="resume"  [ngModelOptions]="{standalone: true}" id="resume" checked>
+                    <label class="custom-control-label" for="resume">resume</label>
+                  </div>
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" [(ngModel)]="cover"  [ngModelOptions]="{standalone: true}" id="cover">
+                    <label class="custom-control-label" for="cover">Cover letter</label>
+                  </div>
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" [(ngModel)]="transcript"  [ngModelOptions]="{standalone: true}" id="transcript">
+                    <label class="custom-control-label" for="transcript">Transcript</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card bg-light text-dark" style="width:100%;">
+              <div class="card-body">
+                <div class="row" style=" height: 230px; background-position: center;">
+                  <div *ngFor="let item of comData">
+                    <img *ngIf="authService.currentUserInstance.uid == item.userID" [src]="item.bannerURL"
+                      class="rounded" style="height: 230px; width: 100%;">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2" style="margin:auto;">
+                    <div *ngFor="let item of comData">
+                      <img *ngIf="authService.currentUserInstance.uid == item.userID" [src]="item.logoURL"
+                        class="rounded" style="width: 80px; margin-top: 10px;">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="row">
+                      <h5 style="margin-top: 15px;">{{this.job_title}}</h5>
+                    </div>
+                    <div class="row" style="margin-top: 10px;">
+                      <div class="col">
+                        <div *ngFor="let item of comData">
+                          <p class="des" *ngIf="authService.currentUserInstance.uid == item.userID"><i
+                              class="fas fa-home"></i>
+                            {{item.name }}</p>
+                          <p class="des" *ngIf="authService.currentUserInstance.uid == item.userID"><i
+                              class="fas fa-map-marker-alt"></i>
+                            {{this.job_location}}</p>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div *ngFor="let item of comData">
+                          <p class="des" *ngIf="authService.currentUserInstance.uid == item.userID"><i
+                              class="fas fa-comment-dots"></i>
+                            {{item.industry}}</p>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <p class="des"><i class="fas fa-users"></i>
+                          {{this.student_number}}</p>
+                        <p class="des"><i class="fas fa-dollar-sign"></i>
+                          {{this.salary}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div  class="row" style="margin-top: 10px;">
+                  <div *ngFor="let item of comData">
+                    <p class="des" *ngIf="authService.currentUserInstance.uid == item.userID" style="padding: 17px;"><strong>Who we are:</strong> 
+                      {{item.description}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="card bg-light text-dark" style="width:100%; margin-top: 30px;">
+                  <div class="card-body" style="height: auto;">
+                    <label style="margin: auto; width: 60%; ">
+                      <h5>Job Description</h5><br>
+                      {{this.description}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card bg-light text-dark" style="width:100%; margin-top: 30px;">
+              <div class="card-body" style="height: auto;">
+                <label style="margin: auto; width: 60%; ">
+                  <div *ngFor="let item of comData">
+                    <h5 *ngIf="authService.currentUserInstance.uid == item.userID">About {{item.name }}</h5>
+                  </div>
+                </label>
+                <div class="row">
+                  <div class="col">
+                    <div *ngFor="let item of comData">
+                      <p class="des" *ngIf="authService.currentUserInstance.uid == item.userID"><i
+                          class="fas fa-map-marker-alt"></i>
+                        Location:
+                        {{item.com_location }}</p>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div *ngFor="let item of comData">
+                      <p class="des" *ngIf="authService.currentUserInstance.uid == item.userID"><i
+                          class="fab fa-internet-explorer"></i>
+                        Website:
+                        <a href="authService.currentCompanyData.website">{{item.website}}</a></p>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div *ngFor="let item of comData">
+                      <p class="des" *ngIf="authService.currentUserInstance.uid == item.userID"><i
+                          class="fas fa-users"></i> Members:
+                        {{item.size }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </form>
+  </div>
+</ion-content>
+<ion-footer style="background-color: #F29E2E;">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <ion-button color="light" routerLink="/" style="float: right; ">Cancel</ion-button>
+      </div>
+      <div class="col">
+        <a class="carousel-control-prev" href="#slide-post" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#slide-post" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+      <div class="col save" style="align-items: flex-end;">
+        <ion-button type="submit" color="secondary" (click)="goCreateJob()" style="float: left;">Save</ion-button>
+      </div>
+    </div>
+  </div>
+</ion-footer>
+<!-- <div class="divider"></div>
+<div class="post-footer">
+</div> -->

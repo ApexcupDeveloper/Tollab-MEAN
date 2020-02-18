@@ -1,0 +1,96 @@
+<ion-app>
+    <!-- TODO: Generate menu programmatically! -->
+    <ion-split-pane contentId="main-content">
+        <!--        TODO: Return conditions -->
+        <!--        <ion-menu type="overlay"-->
+        <!--                  [disabled]="!languageService.isLanguageSetByUser || !dataStorageService.isVisited || !platform.is('mobile')">-->
+        <ion-menu type="overlay" contentId="main-content"
+                  [disabled]="!platform.is('mobile')">
+            <ion-header>
+                <ion-toolbar color="primary">
+                    <ion-grid>
+                        <ion-row *ngIf="(authService.currentUser | async) || {displayName: 'misc.guest', photoURL:
+                                 'assets/svg/iconfinder_male3_403019.svg'} as user">
+                            <ion-col size="auto" class="ion-align-self-center">
+                                <ion-menu-toggle class="pointer" autoHide="false" routerDirection="root" routerLink="/profile"
+                                                 (click)="onClickProfile()">
+                                    <ion-avatar>
+                                        <img [src]="user.photoURL" alt="User Profile Image">
+                                    </ion-avatar>
+                                </ion-menu-toggle>
+                            </ion-col>
+                            <ion-col size="auto" class="ion-align-self-center">
+                                <ion-label>{{ user.displayName | translate }}</ion-label>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-toolbar>
+            </ion-header>
+            <ion-content scroll-y="false">
+                <ion-list class="full-height-list">
+                    <!--                    <ion-menu-toggle autoHide="false">-->
+                    <!--                        <ion-item button routerDirection="root">-->
+                    <!--                            <ion-icon name="wallet" slot="start"></ion-icon>-->
+                    <!--                            <ion-label>{{ 'balance.title' | translate }}</ion-label>-->
+                    <!--                        </ion-item>-->
+                    <!--                    </ion-menu-toggle>-->
+                    <!--                    <ion-menu-toggle autoHide="false">-->
+                    <!--                        <ion-item button routerDirection="root">-->
+                    <!--                            <ion-icon name="information" slot="start"></ion-icon>-->
+                    <!--                            <ion-label>{{ 'aboutUs.title' | translate }}</ion-label>-->
+                    <!--                        </ion-item>-->
+                    <!--                    </ion-menu-toggle>-->
+                    <!--                    <ion-menu-toggle autoHide="false">-->
+                    <!--                        <ion-item button routerDirection="root">-->
+                    <!--                            <ion-icon name="call" slot="start"></ion-icon>-->
+                    <!--                            <ion-label>{{ 'contactUs.title' | translate }}</ion-label>-->
+                    <!--                        </ion-item>-->
+                    <!--                    </ion-menu-toggle>-->
+                    <ion-menu-toggle autoHide="false">
+                        <ion-item button routerDirection="root" routerLink="/">
+                            <ion-icon name="home" slot="start"></ion-icon>
+                            <ion-label>Home</ion-label>
+                        </ion-item>
+                    </ion-menu-toggle>
+                    <ion-menu-toggle autoHide="false">
+                        <ion-item button routerDirection="root" routerLink="/jobs">
+                            <ion-icon name="code-working" slot="start"></ion-icon>
+                            <ion-label>Jobs and Internships</ion-label>
+                        </ion-item>
+                    </ion-menu-toggle>
+                    <ion-menu-toggle autoHide="false">
+                        <ion-item button routerDirection="root" routerLink="/Companies">
+                            <ion-icon name="business" slot="start"></ion-icon>
+                            <ion-label>Top Companies</ion-label>
+                        </ion-item>
+                    </ion-menu-toggle>
+                    <ion-menu-toggle autoHide="false">
+                        <ion-item button routerDirection="root" routerLink="/coming-soon">
+                            <ion-icon name="clipboard" slot="start"></ion-icon>
+                            <ion-label>Career Tips</ion-label>
+                        </ion-item>
+                    </ion-menu-toggle>
+                    <div class="bottom-items-container">
+                        <ion-menu-toggle autoHide="false">
+                            <!-- TODO: Check this!! -->
+                            <ion-item button *ngIf="(authService.currentUser | async) || {uid: ''} as user"
+                                      (click)="user?.uid?.length ? onLogOut() : onDisplayLoginModal()">
+                                <ion-icon name="log-out" slot="start"></ion-icon>
+                                <ion-label>
+                                    {{ (user?.uid?.length ? 'misc.logOut.upperCase' : 'logIn.title') | translate }}
+                                </ion-label>
+                            </ion-item>
+                        </ion-menu-toggle>
+                        <!--                        <ion-menu-toggle autoHide="false">-->
+                        <!--                            <ion-item button routerDirection="root">-->
+                        <!--                                <ion-icon name="settings" slot="start"></ion-icon>-->
+                        <!--                                <ion-label>{{ 'settings.title' | translate }}</ion-label>-->
+                        <!--                            </ion-item>-->
+                        <!--                        </ion-menu-toggle>-->
+                    </div>
+                </ion-list>
+            </ion-content>
+        </ion-menu>
+        <ion-router-outlet id="main-content"></ion-router-outlet>
+    </ion-split-pane>
+</ion-app>

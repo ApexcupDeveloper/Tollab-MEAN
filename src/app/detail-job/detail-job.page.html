@@ -1,0 +1,196 @@
+<app-nav-bar></app-nav-bar>
+
+<ion-content>
+  <div class="container" style="margin: 30px auto;">
+    <div class="card bg-light text-dark" style="width:100%; margin-top: 30px;">
+      <div class="card-body" style="height: auto; text-align: center;">
+        <div class="row">
+          <div class="col" *ngIf="flag" style="align-items: flex-start; margin: auto;">
+            <label style="margin: auto;">
+              <div class="row">
+                <div class="col" style="align-items: center; display: flex;">
+                  <p style="margin: auto;">Select your job title</p>
+                </div>
+                <div class="col">
+                  <select class="form-group" id="sel1"
+                    style="border-width: 0px; margin: auto; font-size: 23px; background-color: rgba(255, 174, 0, 0.486);"
+                    [(ngModel)]="myjobtitle">
+                    <option *ngFor="let item of currentJob, let i = index" id="here" value="{{item.job_title}}">
+                      {{item.job_title}}</option>
+                  </select>
+                </div>
+              </div>
+            </label>
+          </div>
+          <div class="col" *ngIf="flag" style="margin: auto;">
+            <div *ngFor="let item of currentJob">
+              <button *ngIf="item.job_title == myjobtitle" class="btn btn-outline-primary btn-sm" style="margin: 5px;"
+                (click)="goPost()">Edit Details</button>
+              <button *ngIf="item.job_title == myjobtitle" class="btn btn-outline-primary btn-sm" style="margin: 5px;"
+                (click)="goDetail(item.id)"> Applicants</button>
+            </div>
+          </div>
+          <div class="col" *ngIf="!flag">
+            <label style="margin: auto;">
+              <h5>You must post the job!</h5>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="card bg-light text-dark" style="width:100%; margin-top: 30px;">
+      <div class="card-body" style="height: 200px; text-align: center; margin-bottom: 20px;">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>School</th>
+              <th>Applications</th>
+              <th>Last Update</th>
+              <th>Status</th>
+              <th>Comments</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John</td>
+              <td>Doe</td>
+              <td>Doe</td>
+              <td>Doe</td>
+              <td>john@example.com</td>
+            </tr>
+            <tr>
+              <td>Mary</td>
+              <td>Moe</td>
+              <td>Doe</td>
+              <td>Doe</td>
+              <td>mary@example.com</td>
+            </tr>
+            <tr>
+              <td>July</td>
+              <td>Dooley</td>
+              <td>Doe</td>
+              <td>Doe</td>
+              <td>july@example.com</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div> -->
+    <div class="card bg-light text-dark" style="width:100%; margin-top: 30px;">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-1">
+            <div *ngFor="let item1 of comData">
+              <img *ngIf="authService.currentUserInstance.uid == item1.userID" [src]="item1.logoURL" class="rounded"
+                style="width: 55px;">
+            </div>
+          </div>
+          <div class="col-md-11" style="padding:10px 15px;">
+            <!-- <div class="row" *ngFor="let item of currentJob" >
+              <p class="title" *ngIf="#"> {{item.job_title }}</p>
+            </div> -->
+            <div class="row" *ngFor="let item of currentJob">
+              <p class="title" *ngIf="item.job_title == myjobtitle"> {{ item.job_title }}</p>
+            </div>
+            <div class="row">
+              <p class="des" *ngFor="let item1 of comData">
+                <a href="website" *ngIf="authService.currentUserInstance.uid == item1.userID">
+                  {{item1.name}}</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body" style="height: auto; text-align: left;">
+        <div>
+          <h5>About this Job</h5>
+          <div *ngFor="let item of currentJob">
+            <p *ngIf="item.job_title == myjobtitle">{{item.description}}</p>
+          </div>
+
+        </div>
+        <div style="margin-top: 30px;">
+          <div *ngFor="let item1 of comData">
+            <h5 *ngIf="authService.currentUserInstance.uid == item1.userID">About {{item1.name}}</h5>
+            <p *ngIf="authService.currentUserInstance.uid == item1.userID">{{item1.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="card bg-light text-dark" style=" margin-top: 30px;">
+            <div class="card-body" style="height: auto;">
+              <label style="margin: auto; width: 60%; ">
+                <h6><i class="fas fa-map-marker-alt"></i> Location</h6>
+                <div *ngFor="let item of currentJob">
+                  <p *ngIf="item.job_title == myjobtitle">{{item.job_location}}</p>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card bg-light text-dark" style=" margin-top: 30px;">
+            <div class="card-body" style="height: auto;">
+              <label style="margin: auto; width: 60%; ">
+                <h6><i class="fas fa-money-bill-alt"></i> Salary</h6>
+                <div *ngFor="let item of currentJob">
+                  <p *ngIf="item.job_title == myjobtitle">{{item.salary}}</p>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="card bg-light text-dark" style="margin-top: 30px;">
+            <div class="card-body" style="height: auto;">
+              <h6><i class="fas fa-info-circle"></i> Company Detail</h6>
+              <div class="row">
+                <div class="col-md-6">
+                  <div *ngFor="let item1 of comData">
+                    <p *ngIf="authService.currentUserInstance.uid == item1.userID"><i class="fas fa-map-marker-alt"></i>
+                      {{item1.com_location}}</p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div *ngFor="let item1 of comData">
+                    <p *ngIf="authService.currentUserInstance.uid == item1.userID"><a href="email"><i
+                          class="fas fa-envelope"></i> {{item1.email}}</a></p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div *ngFor="let item1 of comData">
+                    <p *ngIf="authService.currentUserInstance.uid == item1.userID"> <i class="fas fa-users"></i>
+                      {{item1.size}}</p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div *ngFor="let item1 of comData">
+                    <p *ngIf="authService.currentUserInstance.uid == item1.userID"><i class="fas fa-info"></i>
+                      {{item1.industry}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card bg-light text-dark" style="margin-top: 30px;">
+            <div class="card-body" style="height: auto;">
+              <label style="margin: auto; width: 60%; ">
+                <h6><i class="fas fa-bookmark"></i> Employer Prefernces</h6>
+                <p>Each school can have its own.</p>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</ion-content>

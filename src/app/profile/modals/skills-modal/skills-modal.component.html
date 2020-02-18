@@ -1,0 +1,99 @@
+<ion-grid class="ion-padding modal-content" [formGroup]="form">
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">{{ 'profile.modals.skills.languages' | translate }}</ion-label>
+                <ion-input type="text" formControlName="languages"
+                           (keydown.enter)="onAddSkill('languages')"></ion-input>
+            </ion-item>
+        </ion-col>
+        <ion-col size="auto" align-self-center>
+            <ion-button shape="round" no-padding (click)="onAddSkill('languages')">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">{{ 'profile.modals.skills.technical' | translate }}</ion-label>
+                <ion-input type="text" formControlName="technical"
+                           (keydown.enter)="onAddSkill('technical')"></ion-input>
+            </ion-item>
+        </ion-col>
+        <ion-col size="auto" align-self-center>
+            <ion-button shape="round" no-padding (click)="onAddSkill('technical')">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">{{ 'profile.modals.skills.otherSkills' | translate }}</ion-label>
+                <ion-input type="text" formControlName="mySkills" (keydown.enter)="onAddSkill('mySkills')"></ion-input>
+            </ion-item>
+        </ion-col>
+        <ion-col size="auto" align-self-center>
+            <ion-button shape="round" no-padding (click)="onAddSkill('mySkills')">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <h3>{{ 'profile.modals.skills.skills' | translate }}</h3>
+            <div class="skills-container" padding>
+                <div *ngIf="data.languages && data.languages.length">
+                    <ion-label>
+                        <ion-icon name="chatbubbles"></ion-icon>
+                        {{ 'profile.modals.skills.languages' | translate }}
+                    </ion-label>
+                    <div padding>
+                        <ion-chip *ngFor="let skill of data.languages; let i = index;"
+                                  (click)="onRemoveSkill('languages', i)">
+                            <ion-label>{{ skill }}</ion-label>
+                            <ion-icon name="close"></ion-icon>
+                        </ion-chip>
+                    </div>
+                </div>
+
+                <div *ngIf="data.technical && data.technical.length">
+                    <ion-label>
+                        <ion-icon name="laptop"></ion-icon>
+                        {{ 'profile.modals.skills.technicalSkills' | translate }}
+                    </ion-label>
+                    <div padding>
+                        <ion-chip *ngFor="let skill of data.technical; let i = index;"
+                                  (click)="onRemoveSkill('technical', i)">
+                            <ion-label>{{ skill }}</ion-label>
+                            <ion-icon name="close"></ion-icon>
+                        </ion-chip>
+                    </div>
+                </div>
+
+                <div *ngIf="data.mySkills && data.mySkills.length">
+                    <ion-label>
+                        <ion-icon name="walk"></ion-icon>
+                        {{ 'profile.modals.skills.otherSkills' | translate }}
+                    </ion-label>
+                    <div padding>
+                        <ion-chip *ngFor="let skill of data.mySkills; let i = index;"
+                                  (click)="onRemoveSkill('mySkills', i)">
+                            <ion-label>{{ skill }}</ion-label>
+                            <ion-icon name="close"></ion-icon>
+                        </ion-chip>
+                    </div>
+                </div>
+            </div>
+        </ion-col>
+    </ion-row>
+    <ion-row padding justify-content-end>
+        <ion-col size="auto">
+            <ion-buttons>
+                <ion-button color="primary" (click)="onCancel()">{{ 'profile.modals.skills.cancel' | translate }}</ion-button>
+                <ion-button color="primary" (click)="onSave()">{{ 'profile.modals.skills.save' | translate }}</ion-button>
+            </ion-buttons>
+        </ion-col>
+    </ion-row>
+</ion-grid>

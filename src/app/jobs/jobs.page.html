@@ -1,0 +1,327 @@
+<app-nav-bar></app-nav-bar>
+<ion-content>
+  <div class="virtual-body">
+    <div class="container" style="height: 700px auto;">
+      <div class="form-group">
+        <div class="input-group mb-3" style="margin-top: 30px;">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+          </div>
+          <input type="text" class="form-control" [(ngModel)]="job_search" name="job_search"
+            placeholder="Search by job title, job location...">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="item item-input item-select input-group wrapper">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Employment Type</span>
+          </div>
+          <select name="cars" class="custom-select" [(ngModel)]="employmentType">
+            <option value="" selected>Both</option>
+            <option value="full-time">Full-Time</option>
+            <option value="part-time">Part-Time</option>
+          </select>
+          <div class="input-group-prepend">
+            <span class="input-group-text">Job Type</span>
+          </div>
+          <select name="cars" class="custom-select" [(ngModel)]="jobType">
+            <option value="">All type</option>
+            <option value="internship">Internship</option>
+            <option value="education">Cooperative Education</option>
+            <option value="experiential">Experiential Learning</option>
+            <option value="campus">On campus Student Employment</option>
+            <option value="fellowship">Fellowship</option>
+            <option value="graduate">Graduate School</option>
+            <option value="job">Job</option>
+            <option value="volunter">Volunter</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <div class="row" *ngIf="job_search !==''">
+          <div *ngFor="let item of pageOfItems | filter: job_search, let i = index">
+            <div class="card bg-light text-dark">
+              <div class="card-header" style="padding: 2px; height: 60px;">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div *ngFor="let item1 of getCompanyData">
+                      <img *ngIf="item.userID == item1.userID" [src]="item1.logoURL" class="rounded"
+                        style="width: 55px;">
+                    </div>
+                  </div>
+                  <div class="col-md-9">
+                    <div class="row" style="height: 30px;">
+                      <label class="com_name" *ngFor="let item1 of getCompanyData">
+                        <a href="/profile-company?id={{item1.userID}}"
+                          *ngIf="item.userID == item1.userID">{{item1.name}}</a></label>
+                    </div>
+                    <div class="row" style="height: 30px;">
+                      <label class="com_location" *ngFor="let item1 of getCompanyData">
+                        <a *ngIf="item.userID == item1.userID">
+                          {{item1.com_location }}
+                        </a>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body" style="text-align: left; padding: 10px;">
+                <div>
+                  <h6>{{item.job_title}}</h6>
+                </div>
+                <div>
+                  <!-- <p>{{item.description}}</p> -->
+                </div>
+              </div>
+              <div class="card-footer" style="height: 40px; padding: 5px;">
+                <div class="button-bar">
+                  <!-- <button type="button" class="btn btn-outline-info btn-sm" style="float: left;">Save <i
+                                class="fas fa-save"></i></button> -->
+                  <button type="button" class="btn btn-info btn-sm"
+                    (click)="goModal(item.job_title, item.description, item.userID, ListArrayID[i])"
+                    style="width: 50%; float: right;">Apply
+                    <i class="fas fa-share-square"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="job_search =='' &&  employmentType !=='' && jobType =='' ">
+          <div class="card text-center">
+            <div class="card-body">
+              <div class="row">
+                <div *ngFor="let item of pageOfItems, let i = index" [ngSwitch]="item.employment_type">
+                  <div *ngSwitchCase="employmentType" class="card bg-light text-dark">
+                    <div class="card-header" style="padding: 2px; height: 60px;">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div *ngFor="let item1 of getCompanyData">
+                            <img *ngIf="item.userID == item1.userID" [src]="item1.logoURL" class="rounded"
+                              style="width: 55px;">
+                          </div>
+                        </div>
+                        <div class="col-md-9">
+                          <div class="row" style="height: 30px;">
+                            <label class="com_name" *ngFor="let item1 of getCompanyData">
+                              <a href="/profile-company?id={{item1.userID}}"
+                                *ngIf="item.userID == item1.userID">{{item1.name}}</a></label>
+                          </div>
+                          <div class="row" style="height: 30px;">
+                            <label class="com_location" *ngFor="let item1 of getCompanyData">
+                              <a *ngIf="item.userID == item1.userID">
+                                {{item1.com_location }}
+                              </a>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-body" style="text-align: left; padding: 10px;">
+                      <div>
+                        <h6>{{item.job_title}}</h6>
+                      </div>
+                      <div>
+                        <!-- <p>{{item.description}}</p> -->
+                      </div>
+                    </div>
+                    <div class="card-footer" style="height: 40px; padding: 5px;">
+                      <div class="button-bar">
+                        <!-- <button type="button" class="btn btn-outline-info btn-sm" style="float: left;">Save <i
+                                class="fas fa-save"></i></button> -->
+                        <button type="button" class="btn btn-info btn-sm"
+                          (click)="goModal(item.job_title, item.description, item.userID, ListArrayID[i])"
+                          style="width: 50%; float: right;">Apply
+                          <i class="fas fa-share-square"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer pb-0 pt-3">
+              <jw-pagination [items]="items" [pageSize]="12" (changePage)="onChangePage($event)"></jw-pagination>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="job_search =='' &&  jobType !==''&& employmentType =='' ">
+          <div class="card text-center">
+            <div class="card-body">
+              <div class="row">
+                <div *ngFor="let item of pageOfItems, let i = index" [ngSwitch]="item.job_type">
+                  <div *ngSwitchCase="jobType" class="card bg-light text-dark">
+                    <div class="card-header" style="padding: 2px; height: 60px;">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div *ngFor="let item1 of getCompanyData">
+                            <img *ngIf="item.userID == item1.userID" [src]="item1.logoURL" class="rounded"
+                              style="width: 55px;">
+                          </div>
+                        </div>
+                        <div class="col-md-9">
+                          <div class="row" style="height: 30px;">
+                            <label class="com_name" *ngFor="let item1 of getCompanyData">
+                              <a href="/profile-company?id={{item1.userID}}"
+                                *ngIf="item.userID == item1.userID">{{item1.name}}</a></label>
+                          </div>
+                          <div class="row" style="height: 30px;">
+                            <label class="com_location" *ngFor="let item1 of getCompanyData">
+                              <a *ngIf="item.userID == item1.userID">
+                                {{item1.com_location }}
+                              </a>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-body" style="text-align: left; padding: 10px;">
+                      <div>
+                        <h6>{{item.job_title}}</h6>
+                      </div>
+                      <div>
+                        <!-- <p>{{item.description}}</p> -->
+                      </div>
+                    </div>
+                    <div class="card-footer" style="height: 40px; padding: 5px;">
+                      <div class="button-bar">
+                        <!-- <button type="button" class="btn btn-outline-info btn-sm" style="float: left;">Save <i
+                      class="fas fa-save"></i></button> -->
+                        <button type="button" class="btn btn-info btn-sm"
+                          (click)="goModal(item.job_title, item.description, item.userID, ListArrayID[i])"
+                          style="width: 50%; float: right;">Apply
+                          <i class="fas fa-share-square"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer pb-0 pt-3">
+              <jw-pagination [items]="items" [pageSize]="12" (changePage)="onChangePage($event)"></jw-pagination>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="job_search =='' &&  jobType =='' && employmentType==''">
+          <div class="card text-center">
+            <div class="card-body">
+              <div class="row">
+                <div *ngFor="let item of pageOfItems, let i = index">
+                  <div class="card bg-light text-dark">
+                    <div class="card-header" style="padding: 2px; height: 60px;">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div *ngFor="let item1 of getCompanyData">
+                            <img *ngIf="item.userID == item1.userID" [src]="item1.logoURL" class="rounded"
+                              style="width: 55px;">
+                          </div>
+                        </div>
+                        <div class="col-md-9">
+                          <div class="row" style="height: 30px;">
+                            <label class="com_name" *ngFor="let item1 of getCompanyData">
+                              <a href="/profile-company?id={{item1.userID}}"
+                                *ngIf="item.userID == item1.userID">{{item1.name}}</a></label>
+                          </div>
+                          <div class="row" style="height: 30px;">
+                            <label class="com_location" *ngFor="let item1 of getCompanyData">
+                              <a *ngIf="item.userID == item1.userID">
+                                {{item1.com_location }}
+                              </a>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-body" style="text-align: left; padding: 10px;">
+                      <div>
+                        <h6>{{item.job_title}}</h6>
+                      </div>
+                      <div>
+                        <!-- <p>{{item.description}}</p> -->
+                      </div>
+                    </div>
+                    <div class="card-footer" style="height: 40px; padding: 5px;">
+                      <div class="button-bar">
+                        <!-- <button type="button" class="btn btn-outline-info btn-sm" style="float: left;">Save <i
+                            class="fas fa-save"></i></button> -->
+                        <button type="button" class="btn btn-info btn-sm"
+                          (click)="goModal(item.job_title, item.description, item.userID, ListArrayID[i])"
+                          style="width: 50%; float: right;">Apply
+                          <i class="fas fa-share-square"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer pb-0 pt-3">
+              <jw-pagination [items]="items" [pageSize]="12" (changePage)="onChangePage($event)"></jw-pagination>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="job_search =='' &&  jobType !=='' && employmentType !==''">
+          <div class="card text-center">
+            <div class="card-body">
+              <div class="row">
+                <div *ngFor="let item of pageOfItems, let i = index" [ngSwitch]="item.job_type">
+                  <div *ngSwitchCase="jobType">
+                    <div class="" [ngSwitch]="item.employment_type">
+                      <div *ngSwitchCase="employmentType" class="card bg-light text-dark">
+                        <div class="card-header" style="padding: 2px; height: 60px;">
+                          <div class="row">
+                            <div class="col-md-3">
+                              <div *ngFor="let item1 of getCompanyData">
+                                <img *ngIf="item.userID == item1.userID" [src]="item1.logoURL" class="rounded"
+                                  style="width: 55px;">
+                              </div>
+                            </div>
+                            <div class="col-md-9">
+                              <div class="row" style="height: 30px;">
+                                <label class="com_name" *ngFor="let item1 of getCompanyData">
+                                  <a href="/profile-company?id={{item1.userID}}"
+                                    *ngIf="item.userID == item1.userID">{{item1.name}}</a></label>
+                              </div>
+                              <div class="row" style="height: 30px;">
+                                <label class="com_location" *ngFor="let item1 of getCompanyData">
+                                  <a *ngIf="item.userID == item1.userID">
+                                    {{item1.com_location }}
+                                  </a>
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card-body" style="text-align: left; padding: 10px;">
+                          <div>
+                            <h6>{{item.job_title}}</h6>
+                          </div>
+                          <div>
+                            <!-- <p>{{item.description}}</p> -->
+                          </div>
+                        </div>
+                        <div class="card-footer" style="height: 40px; padding: 5px;">
+                          <div class="button-bar">
+                            <!-- <button type="button" class="btn btn-outline-info btn-sm" style="float: left;">Save <i
+                            class="fas fa-save"></i></button> -->
+                            <button type="button" class="btn btn-info btn-sm"
+                              (click)="goModal(item.job_title, item.description, item.userID, ListArrayID[i])"
+                              style="width: 50%; float: right;">Apply
+                              <i class="fas fa-share-square"></i></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer pb-0 pt-3">
+              <jw-pagination [items]="items" [pageSize]="12" (changePage)="onChangePage($event)"></jw-pagination>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 250px;">
+      <app-footer></app-footer>
+    </div>
+  </div>
+</ion-content>

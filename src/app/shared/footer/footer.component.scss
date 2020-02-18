@@ -1,0 +1,41 @@
+ion-footer {
+  a {
+    color: white;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #1cb5ef;
+    text-decoration: underline;
+  }
+
+  a:active {
+    color: #03ADED;
+    text-decoration: underline;
+  }
+
+  .logo-white {
+    height: 100px;
+    width: 100px;
+  }
+
+  .footer-list {
+    list-style: none;
+
+    li {
+      padding-bottom: 10px;
+    }
+
+    li:first-child {
+      padding-top: 12px;
+    }
+  }
+
+  .find-us {
+    justify-self: end !important;
+
+    ion-icon {
+      font-size: 48px;
+    }
+  }
+}

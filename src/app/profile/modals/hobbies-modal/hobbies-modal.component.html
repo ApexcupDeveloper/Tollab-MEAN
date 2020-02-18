@@ -1,0 +1,34 @@
+<ion-grid class="ion-padding modal-content" [formGroup]="form">
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">{{ 'profile.modals.hobbies.hobby' | translate }}</ion-label>
+                <ion-input formControlName="hobby" (keydown.enter)="onAddHobby()"></ion-input>
+            </ion-item>
+        </ion-col>
+        <ion-col size="auto" align-self-center>
+            <ion-button shape="round" no-padding (click)="onAddHobby()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <h3>{{ 'profile.modals.hobbies.hobbies' | translate }}</h3>
+            <div padding class="hobbies-container">
+                <ion-chip *ngFor="let hobby of data; let i = index;" (click)="onRemoveHobby(i)">
+                    <ion-label>{{ hobby }}</ion-label>
+                    <ion-icon name="close"></ion-icon>
+                </ion-chip>
+            </div>
+        </ion-col>
+    </ion-row>
+    <ion-row padding justify-content-end>
+        <ion-col size="auto">
+            <ion-buttons>
+                <ion-button color="primary" (click)="onCancel()">{{ 'profile.modals.hobbies.cancel' | translate }}</ion-button>
+                <ion-button color="primary" (click)="onSave()">{{ 'profile.modals.hobbies.save' | translate }}</ion-button>
+            </ion-buttons>
+        </ion-col>
+    </ion-row>
+</ion-grid>

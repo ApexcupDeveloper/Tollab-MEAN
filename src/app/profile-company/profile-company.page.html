@@ -1,0 +1,279 @@
+<app-nav-bar></app-nav-bar>
+<ion-content>
+  <div>
+    <img src="{{bannerURL}}" class="rounded"
+      style="width: 100%; height: 400px; object-fit: cover;  background-position: center; ">
+    <div *ngIf="ownerFlag" class="dropzone" dropzone (hovered)="toggleHover($event)" (dropped)="onDrop($event)"
+      [class.hovering]="isHovering" style="margin-left: 10px;" (click)="bannerflag= true">
+      <div class="file">
+        <label class="btn btn-default picture-upload">
+          Change Picture<input *ngIf="ownerFlag" type="file" (change)="onDrop($event.target.files)" hidden>
+        </label>
+        <div class="picture-upload1" *ngFor="let file of files">
+          <app-upload-task *ngIf="bannerflag" [file]="file" [types]="'banner'" [articleData]=""></app-upload-task>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="container">
+      <ion-row style="align-items: center;">
+        <div class="col">
+          <ion-row style="float: right;">
+            <div class="row">
+              <div class="col">
+                <img src="{{logoURL}}" class="rounded" style="width: 80px;">
+                <div *ngIf="ownerFlag" class="dropzone file logo-upload" dropzone (hovered)="toggleHover($event)"
+                  (dropped)="onDrop($event)" [class.hovering]="isHovering" (click)="logoflag = true">
+                  <label style="cursor: pointer;">
+                    <i class="fas fa-camera"></i>
+                    <input *ngIf="ownerFlag" type="file" (change)="onDrop($event.target.files)" hidden>
+                  </label>
+                  <div class="logo-upload1" *ngFor="let file of files">
+                    <app-upload-task *ngIf="logoflag" [file]="file" [types]="'logo'" [articleData]=""></app-upload-task>
+                  </div>
+                </div>
+              </div>
+              <div style="margin: auto;">
+                <p><strong>{{name}}</strong></p>
+                <p>{{com_location}}</p>
+              </div>
+            </div>
+          </ion-row>
+        </div>
+        <div class="col" style="text-align: left; margin-left: 150px;">
+          <p>EMPLOYEES</p>
+          <p>{{size}}</p>
+        </div>
+      </ion-row>
+    </div>
+  </div>
+  <div style="padding-bottom: 30px;">
+    <div style="height: 500px; background-color: #F29E2E;">
+      <div class="container middle-container" style=" padding-top: 30px; margin-bottom: 20px;">
+        <h5 *ngIf="postJob.length" style="color: white;  text-align: center;">OPPORTUNITIES AT {{name}}</h5>
+        <div class="row">
+          <div class="card w3-card col-sm-4" *ngFor="let item of postJob">
+            <div class="card-body">
+              <h4 class="card-title">{{item.job_title}}</h4>
+              <p class="card-text">{{item.job_type}}, {{item.job_location}}</p>
+            </div>
+            <div class="card-footer">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container  w3-card middle-container"
+        style=" background-color: rgb(221, 130, 11); margin: 10px auto; overflow: auto; padding: 30px;">
+        <div class="row" style="margin: auto;">
+          <div class="col" style="margin: auto;">
+            <h4 style="color: white; margin-bottom: 10px; ">ARTICLES BY {{name}}</h4>
+          </div>
+          <div class="col" *ngIf="ownerFlag" style="margin: auto;">
+            <label class="btn btn-default" style="float: right;">
+              Add <input (click)="editArticle = true" hidden>
+            </label>
+          </div>
+        </div>
+        <div class="row" *ngIf="editArticle">
+          <div class="col">
+            <input [(ngModel)]="article" type="text" class="form-control" placeholder="Type the description" />
+          </div>
+          <div class="toolbar">
+            <div class="dropzone" dropzone (hovered)="toggleHover($event)" (dropped)="onDrop($event)"
+              [class.hovering]="isHovering" style="margin-left: 10px;">
+              <div class="file">
+
+                <label class="btn btn-default">
+                  With Image<input *ngIf="ownerFlag" type="file" (change)="onDrop($event.target.files)" hidden>
+                </label>
+                <button class="btn btn-success" (click)="goSave()">Only Text</button>
+                <button class="btn btn-danger" (click)="editArticle = false"><i
+                    class="fas fa-window-close"></i></button>
+                <div *ngFor="let file of files">
+                  <app-upload-task [file]="file" [types]="'article'" [articleData]="article"></app-upload-task>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4" *ngFor="let video of videoData, let i = index" style="padding: 0px;">
+            <div class="w3-card card panel-primary ">
+              <div class="card-body" style="padding: 0px;">
+                <img *ngIf="video.downloadURL" [src]="video.downloadURL" class="img-responsive card-img-top img-article"
+                  style="width:100%" alt="Image">
+                <p *ngIf="!video.downloadURL" style="padding: 10px;height: 275px;">{{video.data}}</p>
+                <label class="btn picture-delete">
+                  Delete<button *ngIf="ownerFlag" (click)="goDelete(video.id)" hidden></button>
+                </label>
+              </div>
+              <div *ngIf="video.downloadURL" class="card-footer">{{video.data}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container middle-container" style="margin: auto; margin-top: 20px;">
+        <div class="row">
+          <div class="col-sm-5 w3-card card" style="height: auto; margin: auto;">
+            <div class="card-header">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title perks">Who We Are?</h5>
+                </div>
+                <div *ngIf="ownerFlag" class="editclass">
+                  <div class="pull-right text-success" (click)="canEditDescription = true"><i class="fas fa-edit"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <div class="row">
+                    <div class="col">
+                      <p *ngIf="!canEditDescription">{{description}}</p>
+                      <input *ngIf="canEditDescription" [(ngModel)]="description" type="text" class="form-control"
+                        value="{{description}}" />
+                    </div>
+                    <div class="toolbar">
+                      <button class="btn btn-success" *ngIf="canEditDescription" (click)="goDes(description)"><i
+                          class="fas fa-save"></i></button>
+                      <button class="btn btn-danger" *ngIf="canEditDescription" (click)="canEditDescription = false"><i
+                          class="fas fa-window-close"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-5 w3-card card" style="height: auto;margin: auto;">
+            <div class="card-header">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title perks">Contact Us</h5>
+                </div>
+                <div *ngIf="ownerFlag" class="editclass">
+                  <div class="pull-right text-success"><i class="fas fa-edit" (click)="canEditEmail = true"></i></div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <div class="row">
+                    <div class="col">
+                      <label *ngIf="!canEditEmail">email: {{email}}</label>
+                      <input *ngIf="canEditEmail" [(ngModel)]="email" type="text" class="form-control"
+                        value="{{email}}" />
+                    </div>
+                    <div class="toolbar">
+                      <button class="btn btn-success" *ngIf="canEditEmail" (click)="goEmail(email)"><i
+                          class="fas fa-save"></i></button>
+                      <button class="btn btn-danger" *ngIf="canEditEmail" (click)="canEditEmail = false"><i
+                          class="fas fa-window-close"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container middle-container" style="margin-top: 20px; margin-bottom: 20px;">
+        <div class="w3-card card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-10">
+                <h5>VIDEO</h5>
+              </div>
+              <div *ngIf="ownerFlag" class="col editclass">
+                <div class="pull-right text-success"><i class="fas fa-edit" (click)="video = true"></i></div>
+              </div>
+            </div>
+            <div *ngIf="video">
+              <div class="row">
+                <div class="col">
+                  <input [(ngModel)]="youtube" type="text" class="form-control" />
+                </div>
+                <div class="toolbar">
+                  <button class="btn btn-success" (click)="goVideo(youtube)"><i class="fas fa-save"></i></button>
+                  <button class="btn btn-danger" (click)="video = false" style="margin-right: 15px;"><i
+                      class="fas fa-window-close"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <div id="movie-slides" class="carousel slide" data-ride="carousel" data-interval="0"
+              style="text-align: center;">
+              <div class="carousel-inner">
+                <div [class]="i == 0 ? 'carousel-item active' : 'carousel-item'" *ngFor="let v of videoURLs, let i = index">
+                  <iframe *ngIf="v.id" [src]="v.data" width="100%" height="450px" frameborder="0"
+                    webkitallowfullscreen mozallowfullscreen allowfullscreen id="carousel-item-iframe">
+                  </iframe>
+                  <label *ngIf="ownerFlag" class="btn picture-delete">
+                    Delete<button *ngIf="ownerFlag" (click)="goDeleteVideo(v.id)" hidden></button>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer" style="background-color: #F29E2E;">
+            <div class="row">
+              <div class="col" style="display: flex; align-items: center;">
+                <a href="#movie-slides" role="button" data-slide="prev" style="float: left; display: flex;">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </a>
+              </div>
+              <div class="col" style="display: flex; align-items: center;justify-content: flex-end;">
+                <a href="#movie-slides" role="button" data-slide="next" style="float: right; display: flex;">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </a>
+              </div>
+            </div>          
+          </div>
+        </div>
+      </div>
+      <div class="container middle-container" style="margin: auto; padding-top: 20px; margin-bottom: 100px;">
+        <div class="row">
+          <div class="col card card-park card-last w3-card" style="margin: 10px;">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-10">
+                  <h5 class="card-title">COMPANY PERKS</h5>
+                </div>
+                <div *ngIf="ownerFlag" class="col editclass">
+                  <div class="pull-right text-success"><i class="fas fa-edit" (click)="perk = true"></i></div>
+                </div>
+              </div>
+              <div style="margin-top: 30px;">
+                <div *ngIf="perk" class="example-block">
+                  <div *ngIf="perk">
+                    <div class="row">
+                      <div class="col">
+                        <input [(ngModel)]="per" type="text" class="form-control" (keyup.enter)="goPerk(per)"/>
+                      </div>
+                      <div class="toolbar">
+                        <button class="btn btn-success" (click)="goPerk(per)"><i class="fas fa-save"></i></button>
+                        <button class="btn btn-danger" (click)="perk = false" style="margin-right: 15px;"><i
+                            class="fas fa-window-close"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="perkData" style="margin-top: 30px;">
+                  <label class="effect label info" *ngFor="let item of perkData">{{item.perk}}  
+                    <i class="far fa-times-circle" style="cursor: pointer;" (click)="goDeletePerk(item.id)"></i>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <app-footer></app-footer>
+    </div>
+  </div>
+</ion-content>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">

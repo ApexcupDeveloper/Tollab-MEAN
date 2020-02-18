@@ -1,0 +1,346 @@
+{
+  "selectLanguage": {
+    "title": "Language",
+    "languages": {
+      "english": "English",
+      "arabic": "Arabic"
+    }
+  },
+  "intro": {
+    "slide1": {
+      "title": "Slide 1",
+      "description": "No Description"
+    },
+    "slide2": {
+      "title": "Slide 2",
+      "description": "No Description"
+    },
+    "slide3": {
+      "title": "Slide 3",
+      "description": "No Description"
+    },
+    "slide4": {
+      "title": "Slide 4",
+      "description": "No Description"
+    },
+    "skip": "Skip",
+    "getStarted": "Get Started"
+  },
+  "logIn": {
+    "title": "Log In",
+    "phoneNumber": "Phone number",
+    "password": "Password",
+    "logIn": "Log in",
+    "email": "Email",
+    "withEmail": "Sign up using Email",
+    "facebook": "Log in with Facebook",
+    "google": "Log in with Google",
+    "forgotPassword": "Forgot password?"
+  },
+  "signUp": {
+    "title": {
+      "signup":"Sign up",
+      "step": "Step",
+      "slash": "/"
+    },
+    "userType": {
+      "title": "User Type",
+      "universityStudent": "University Student",
+      "employer": "Employer"
+    },
+    "gender": {
+      "title": "Gender",
+      "male": "Male",
+      "female": "Female"
+    },
+    "phoneNumber": {
+      "title": "Phone Number"
+    },
+    "verification": {
+      "title": "Verification",
+      "resend": "Re-send SMS code"
+    },
+    "name": {
+      "title": "Full Name",
+      "firstName": "First name",
+      "lastName": "Last name"
+    },
+    "registration": {
+      "title": "Registration",
+      "email": "Email",
+      "password": "Password",
+      "passwordConfirmation": "Re-enter password",
+      "emailExists": "*Email already exists!",
+      "passwordsDoesNotMatch": "*Passwords does not match!",
+      "shortPassword": "*Password must be between (6-32) characters!"
+    }
+  },
+  "tabs": {
+    "home": {
+      "tabName": "Home",
+      "publishNewJob": {
+        "title": "Publish a new job",
+        "form": {
+          "title": "Title",
+          "description": "Description",
+          "applicationUntil": {
+            "date": "Applications' Due Date",
+            "time": "Applications' Due Time"
+          },
+          "payment": "Payment (Hourly)",
+          "skills": "Required Skills",
+          "publish": "Publish"
+        },
+        "success": "Job has been published successfully!"
+      }
+    },
+    "chat": {
+      "tabName": "Chat",
+      "noConversations": "No conversations"
+    },
+    "notifications": {
+      "tabName": "Notifications",
+      "noNotifications": "No notifications"
+    },
+    "profile": {
+      "tabName": "Profile",
+      "editProfile": "Edit Profile"
+    }
+  },
+  "misc": {
+    "next": "Next",
+    "select": "Select",
+    "done": "Done",
+    "or": "or",
+    "guest": "Guest",
+    "logOut": {
+      "lowerCase": "Log out",
+      "upperCase": "Log Out"
+    }
+  },
+  "alert": {
+    "connectionError": {
+      "header": "Connection Error!",
+      "message": "Please try again later!"
+    },
+    "usedPhoneNumber": {
+      "header": "Used Phone Number!",
+      "message": "This phone number is already linked with another user!"
+    },
+    "okay": "Okay",
+    "ok": "OK",
+    "cancel": "Cancel"
+  },
+  "balance": {
+    "title": "Balance"
+  },
+  "aboutUs": {
+    "title": "About Us"
+  },
+  "contactUs": {
+    "title": "Contact Us"
+  },
+  "settings": {
+    "title": "Settings"
+  },
+  "navBar": {
+    "jobsAndInt": "Jobs & Internships",
+    "signup": "Employers",
+    "roadMap": "Career Roadmap",
+    "messages": "Messages",
+    "post": "Post a job",
+    "yourjob": "My jobs",
+    "companies": "Top Companies",
+    "hey": "Hey, "
+  },
+  "footer": {
+    "support": "Support",
+    "contactUs": "Contact Us",
+    "tollab": "Tollab ",
+    "copyRights":"All Rights Reserved.",
+    "madeWith": "Made with",
+    "inPalestine": "In Palestine.",
+    "findUs": "Find us on:"
+  },
+  "comingSoon": {
+    "comingSoon": "Coming Soon!",
+    "description": "We're working hard to finish the development of this site. Our target launch date is December 2019 ! Sign up for updates using the form below!",
+    "notifyMe": "Notify Me!",
+    "invalidEmail": "*Please enter a valid email address.",
+    "enterEmail": "Enter Email...."
+  },
+  "landing": {
+    "startsHere": "Your Career Starts Here!!",
+    "pave": "Pave your career path with us! Learn, develop, enjoy and find great opportunities.",
+    "findMore": "Find Out More",
+    "weHaveWhatYouNeed": "We Have Got What You Need!",
+    "startDeveloping": "Start developing your career using the First gamified learning platform to lead you to your desired position! A data driven platform using gamified learning to develop students' skills and experienceand to guide them through their future.",
+    "signUp": "Sign Up",
+    "whatYouGet": "What You Will Get",
+    "learnMore": "Learn More!",
+    "learnSkills": "Learn the most important skills to get your desired position!",
+    "apply": "Apply What You Have Learnt!",
+    "experience": "Experience theory from the ground up and sharpen your skills!",
+    "beTheBest": "Be the Best!",
+    "getGrades": "Get grades for every achievement you get. Let Employers Know you are the best!",
+    "noNeedResume": "No need for resume anymore",
+    "downloadResume": "Download your resume in ONE CLICK or simply copy a link!",
+    "employer": "Employer?",
+    "areYouInterested" : "Are you interested in joining our community and find the right talents you need?! Contact us!"
+  },
+  "profile": {
+    "changePicture": "Change Picture",
+    "save": "Save",
+    "bio": "Bio",
+    "graphy": "graphy",
+    "bioPlaceHolder": "Write something about yourself!",
+    "cancel": "Cancel",
+    "languages": "Languages",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "details": "Details",
+    "description": "Description",
+    "cards" :  {
+  "skills": {
+    "title": "Skills",
+    "dummyText": "Can you code or speak another language? Add your skills here!"
+  },
+  "education": {
+    "title": "Education"
+  },
+  "workExperience": {
+    "title": "Work Experience",
+    "dummyText": "Add Work Experience to your profile! From Babysitting to a barista job, add your experience!"
+  },
+  "hobbies": {
+    "title": "Hobbies",
+    "dummyText": "What do you love to do outside of work? Cooking? Sports? Traveling? Put it all here."
+  },
+  "volunteer": {
+    "title":"Volunteer",
+    "dummyText": "Do you volunteer? Let people know about the causes you donate your time to here!"
+  },
+  "passion": {
+    "title": "Passion",
+    "dummyText": "What motivates you? What drives you? Tell us what you're passionate about!"
+  },
+  "funFacts": {
+    "title": "Fun Facts",
+    "dummyText": "What's something that most people don't know about you? Tell the world what makes you unique."
+  },
+  "gigsAndFreelance": {
+    "title": "Gigs and Freelance",
+    "dummyText": "Do you have a side gig? What about freelance work? Maybe working on a passion project? Talk about it here!"
+  },
+  "leadership": {
+    "title": "Leadership",
+    "dummyText": "Do you consider yourself a leader? From sports to clubs to extracurriculars, we would love to know how you can lead a team."
+  },
+  "videos": {
+    "title": "Videos",
+    "dummyText": "Do you have any videos of yourself (or videos that you helped make)? Are they on YouTube? Showcase them here!"
+  },
+  "awardsAndAchievements": {
+    "title": "Awards and Achievements",
+    "dummyText": "Do you have any awards or achievements that would make a better candidate out of you? Add them here!"
+  }
+},
+    "hint": {
+      "volunteer": "Have you volunteered? Add it to your profile to reach 30%.",
+      "bio": "Fill up your biography to reach {{percentage}}%.",
+      "workHistory": "Profile tip: To reach {{percentage}}% add your work history.",
+      "skills": "Add skills to your profile to reach {{percentage}}% complete!",
+      "gigs": "Do you have a side gig? What about freelance work? Maybe working on a passion project? Add it to your profile to reach {{percentage}}%.",
+      "leadership": "Have you held a leadership position recently? Add it to your profile to reach {{percentage}}%.",
+      "passion": "What drives you? Add your passion to reach {{percentage}}%.",
+      "funFact": "Add a fun fact to stand out from the crowd!",
+      "hobbies": "Profile tip: Add your hobbies to reach {{percentage}}%.",
+      "ready": "You are ready to go!",
+      "congrats": "Congrats!"
+    },
+    "modals": {
+      "awards": {
+        "title": "Title",
+        "date": "Date",
+        "details": "Details",
+        "cancel": "Cancel"
+      },
+      "education": {
+        "university": "University",
+        "major": "Major",
+        "enrollmentDate": "Enrollment Date",
+        "currStudying": "Currently Studying",
+        "graduationDate": "Graduation Date",
+        "delete": "Delete",
+        "cancel": "Cancel",
+        "save": "Save"
+      },
+      "gigs": {
+        "company": "Company",
+        "title": "Title",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "details": "Details",
+        "cancel": "Cancel",
+        "save": "Save"
+      },
+      "hobbies": {
+        "hobby": "Hobby",
+        "hobbies": "Hobbies:",
+        "cancel": "Cancel",
+        "save": "Save"
+      },
+      "leadership": {
+        "org": "Organization",
+        "title": "Title",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "delete": "Delete",
+        "cancel": "Cancel",
+        "save": "Save",
+        "details": "Details"
+      },
+      "skills": {
+        "languages": "Languages",
+        "technical": "Technical",
+        "etherSkills": "Other Skills",
+        "skills": "Skills:",
+        "technicalSkills": "Technical Skills",
+        "cancel": "Cancel",
+        "save": "Save"
+      },
+      "videos": {
+        "youtubeURL": "Youtube URL",
+        "description": "Description",
+        "delete": "Delete",
+        "cancel": "Cancel",
+        "save": "Save"
+
+      },
+      "volunteer": {
+        "org": "Organization",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "details": "Details",
+        "delete": "Delete",
+        "cancel": "Cancel",
+        "save": "Save"
+      },
+      "workExperience": {
+        "company": "Company",
+        "position": "Position",
+        "startDate": "Start Date",
+        "currentlyWorking": "Currently Working There",
+        "endDate": "End Date",
+        "website": "Website",
+        "details": "Details",
+        "delete": "Delete",
+        "cancel": "Cancel",
+        "save": "Save"
+      }
+
+    }
+  }
+
+
+}

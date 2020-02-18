@@ -1,0 +1,39 @@
+<div class="drop-zone"
+     appDropZone
+     (hovered)="onToggleHover($event)"
+     (dropped)="onDropFile($event)"
+     [class.hovering]="isHovering">
+    <ion-buttons class="ion-justify-content-end">
+        <ion-button size="small" color="danger" [disabled]="isActive(snapshot | async)" (click)="modalCtrl.dismiss()">
+            <ion-icon name="close"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+    <div class="flex-container">
+        <div class="ion-text-center">
+            <h3>Upload an Image</h3>
+            <p>10MB Max!</p>
+        </div>
+        <h3 *ngIf="!isActive(snapshot | async)">Drag and Drop a File</h3>
+        <div class="file">
+            <ion-button [disabled]="isActive(snapshot | async)" (click)="inputElement.click()">
+                <ion-icon name="image" slot="start"></ion-icon>
+                <span>{{ fileList && fileList.length ? fileList[0].name : 'or choose an image...'}}</span>
+                <input type="file" id="file-input" (change)="fileList = $event.target.files"
+                       [disabled]="isActive(snapshot | async)" #inputElement>
+            </ion-button>
+        </div>
+        <ion-button size="large" color="success" *ngIf="fileList && fileList.length && !isActive(snapshot | async)"
+                    (click)="onStartUpload()">
+            <ion-icon name="cloud-upload" slot="start"></ion-icon>
+            <span>Upload Image!</span>
+        </ion-button>
+        <ion-button size="large" color="danger" *ngIf="fileList && fileList.length && isActive(snapshot | async)"
+                    (click)="onCancelUpload()">
+            <ion-icon name="close" slot="start"></ion-icon>
+            <span>Cancel Upload</span>
+        </ion-button>
+        <div *ngIf="percentage | async as percentage" class="ion-padding progress-container">
+            <progress [value]="percentage" max="100"></progress>
+        </div>
+    </div>
+</div>

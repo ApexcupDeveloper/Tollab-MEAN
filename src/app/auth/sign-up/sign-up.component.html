@@ -1,0 +1,158 @@
+<ion-header>
+    <ion-toolbar color="primary" class="ion-text-center">
+        <ion-title>
+            {{ activeSlide }}
+        </ion-title>
+        <ion-buttons slot="start" *ngIf="step !== 1">
+            <ion-button (click)="onGoBack()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end" *ngIf="!hasProvider">
+            <ion-button (click)="modalCtrl.dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-grid class="ion-padding modal-content">
+    <ion-row>
+        <ion-col>
+            <ion-slides [options]="slideOpts">
+                <ion-slide *ngIf="!hasProvider && step === 1">
+                    <ion-grid>
+                        <ion-row align-items-center justify-content-center>
+                            <ion-col>
+                                <ion-card>
+                                    <ion-card-content [formGroup]="fullName">
+                                        <ion-item>
+                                            <ion-label position="floating">{{ 'signUp.name.firstName' | translate }}
+                                            </ion-label>
+                                            <ion-input autofocus type="text" formControlName="firstName"></ion-input>
+                                        </ion-item>
+                                        <ion-item>
+                                            <ion-label position="floating">{{ 'signUp.name.lastName' | translate }}
+                                            </ion-label>
+                                            <ion-input type="text" formControlName="lastName"></ion-input>
+                                        </ion-item>
+                                        <ion-button margin-top shape="round" expand="block" (click)="onGoNext()"
+                                            [disabled]="fullName.invalid">{{ 'misc.next' | translate }}</ion-button>
+                                    </ion-card-content>
+                                </ion-card>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-slide>
+
+                <ion-slide *ngIf="step === 2 || hasProvider">
+                    <ion-grid>
+                        <ion-row class="ion-align-items-center ion-justify-content-center">
+                            <ion-col>
+                                <ion-card>
+                                    <ion-card-content [formGroup]="education">
+                                        <ion-item>
+                                            <ion-label position="floating">University</ion-label>
+                                            <ion-input formControlName="school"></ion-input>
+                                        </ion-item>
+                                        <ion-grid>
+                                            <ion-row formArrayName="majors">
+                                                <ion-col
+                                                    *ngFor="let control of getMajorsFormArray().controls; let i = index;">
+                                                    <ion-item>
+                                                        <ion-label position="floating">Major {{ i + 1 }}</ion-label>
+                                                        <ion-input [formControlName]="'' + i"></ion-input>
+                                                    </ion-item>
+                                                </ion-col>
+                                                <ion-col size="auto" align-self-center>
+                                                    <ion-button shape="round" no-padding
+                                                        *ngIf="getMajorsFormArray().controls.length > 1"
+                                                        (click)="onRemoveMajor()">
+                                                        <ion-icon name="remove"></ion-icon>
+                                                    </ion-button>
+                                                    <ion-button shape="round" no-padding
+                                                        *ngIf="getMajorsFormArray().controls.length < 2"
+                                                        (click)="onAddMajor()">
+                                                        <ion-icon name="add"></ion-icon>
+                                                    </ion-button>
+                                                </ion-col>
+                                            </ion-row>
+                                        </ion-grid>
+                                        <ion-item>
+                                            <ion-label position="floating">Enrollment Date</ion-label>
+                                            <ion-datetime formControlName="enrollDate"
+                                                [max]="today | date:'yyyy-MM-dd'"></ion-datetime>
+                                        </ion-item>
+                                        <ion-item>
+                                            <ion-label>Currently Studying</ion-label>
+                                            <ion-checkbox formControlName="current"></ion-checkbox>
+                                        </ion-item>
+                                        <ion-item>
+                                            <ion-label position="floating">Graduation Date <span
+                                                    *ngIf="education.value.current">(Expected)</span>
+                                            </ion-label>
+                                            <ion-datetime formControlName="graduationDate"
+                                                [max]="twentyYearsLater | date:'yyyy-MM-dd'"></ion-datetime>
+                                        </ion-item>
+                                        <ion-button margin-top shape="round" expand="block"
+                                            (click)="hasProvider ? onSignUp() : onGoNext()"
+                                            [disabled]="education.invalid">{{ 'misc.next' | translate }}</ion-button>
+                                    </ion-card-content>
+                                </ion-card>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-slide>
+
+                <ion-slide *ngIf="step === 3">
+                    <ion-grid>
+                        <ion-row align-items-center justify-content-center>
+                            <ion-col>
+                                <ion-card>
+                                    <ion-card-content [formGroup]="registration">
+                                        <ion-item>
+                                            <ion-label position="floating">{{ 'signUp.registration.email' | translate }}
+                                            </ion-label>
+                                            <ion-input type="email" formControlName="email" #emailInputField>
+                                            </ion-input>
+                                        </ion-item>
+                                        <ion-item>
+                                            <ion-label position="floating">
+                                                {{ 'signUp.registration.password' | translate }}
+                                            </ion-label>
+                                            <ion-input type="password" formControlName="password"></ion-input>
+                                        </ion-item>
+                                        <ion-item>
+                                            <ion-label position="floating">
+                                                {{ 'signUp.registration.passwordConfirmation' | translate }}</ion-label>
+                                            <ion-input type="password" formControlName="passwordConfirmation">
+                                            </ion-input>
+                                        </ion-item>
+                                        <div text-start margin *ngIf="isPasswordShort">
+                                            <ion-text color="danger">
+                                                {{ 'signUp.registration.shortPassword' | translate }}
+                                            </ion-text>
+                                        </div>
+                                        <div text-start margin *ngIf="!isPasswordShort && !isPasswordsMatch">
+                                            <ion-text color="danger">
+                                                {{ 'signUp.registration.passwordsDoesNotMatch' | translate }}
+                                            </ion-text>
+                                        </div>
+                                        <div text-start margin
+                                            *ngIf="!isPasswordShort && isPasswordsMatch && emailExists">
+                                            <ion-label color="danger">
+                                                {{ 'signUp.registration.emailExists' | translate }}
+                                            </ion-label>
+                                        </div>
+                                        <ion-button margin-top shape="round" expand="block" (click)="onSignUp()"
+                                            [disabled]="registration.invalid">{{ 'misc.next' | translate }}</ion-button>
+                                    </ion-card-content>
+                                </ion-card>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-slide>
+            </ion-slides>
+        </ion-col>
+    </ion-row>
+</ion-grid>

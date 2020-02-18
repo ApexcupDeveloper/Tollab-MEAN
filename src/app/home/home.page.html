@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-toolbar class="custom-toolbar">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <!-- Use the jobs observable directly from the jobs service because
+     the observable is reassigned each time the user changes -->
+    <ion-slides pager [options]="slideOpts" *ngIf="role && role === 'student' && (jobsService.jobs | async)">
+        <ion-slide padding *ngFor="let job of (jobsService.jobs | async).slice(0, 5)" (click)="onGoToJob(job)">
+            <ion-card>
+                <ion-card-content text-start>
+                    <ion-label>
+                        <h3>{{ job.title }}</h3>
+                        <p>{{ job.description }}</p>
+                    </ion-label>
+                </ion-card-content>
+            </ion-card>
+        </ion-slide>
+    </ion-slides>
+    <ion-button margin color="tertiary" expand="block" *ngIf="role && role === 'employer'" (click)="onCreateNewJob()">
+        <ion-icon name="add" slot="start"></ion-icon>
+        <ion-label>{{ 'tabs.home.publishNewJob.title' | translate }}</ion-label>
+    </ion-button>
+    <ion-list padding>
+        <ion-item *ngFor="let job of (jobsService.jobs | async)" button (click)="onGoToJob(job)">
+            <ion-label>
+                <h3>{{ job.title }}</h3>
+                <p>{{ job.description }}</p>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

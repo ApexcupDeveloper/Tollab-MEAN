@@ -1,0 +1,29 @@
+<ion-slides padding pager [options]="slideOpts">
+    <ion-buttons slot="end" justify-content-end>
+        <ion-button fill="clear" size="small" color="primary" *ngIf="!isLastSlide"
+                    (click)="onNavigateToLogIn()">{{ 'intro.skip' | translate }}</ion-button>
+    </ion-buttons>
+    <ion-slide>
+        <div>
+            <h1>{{ 'intro.slide1.title' | translate }}</h1>
+        </div>
+    </ion-slide>
+    <ion-slide>
+        <div>
+            <h1>{{ 'intro.slide2.title' | translate }}</h1>
+        </div>
+    </ion-slide>
+    <ion-slide>
+        <div>
+            <h1>{{ 'intro.slide3.title' | translate }}</h1>
+        </div>
+    </ion-slide>
+    <ion-slide>
+        <div>
+            <h1>{{ 'intro.slide4.title' | translate }}</h1>
+            <a (click)="onNavigateToLogIn()">
+                <ion-text color="primary">{{ 'intro.getStarted' | translate }}</ion-text>
+            </a>
+        </div>
+    </ion-slide>
+</ion-slides>

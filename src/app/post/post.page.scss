@@ -1,0 +1,65 @@
+.post-header{
+    height: 60px;
+    margin: auto;
+    padding: 10px;
+    width: 100%;
+    align-items: center;
+}
+.h3, .span{
+    margin-bottom: 0px;
+}
+.container{
+    //  background-color: #F29E2E;
+    margin: 0 auto;
+    padding: 0px;
+}
+.divider {
+    flex-grow: 1;
+    height: 0.5px;
+    border-bottom: 1px solid gray;
+}
+.post-footer{
+    height: 60px;
+
+}
+.post-body{
+    width: 90%;
+    height: auto;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+}
+input{
+    margin-right: 10px;
+}
+label, p{
+    font-size: small;
+    margin-bottom: 0px;
+}
+p{
+    font-weight: bold;
+}
+.radio-group, .form-group{
+    margin-bottom: 20px;
+}
+.form-control {
+    font-size: small;
+}
+.button-bar_custom > .button {
+    -webkit-box-flex: initial;
+    -webkit-flex: initial;
+    -moz-box-flex: initial;
+    -moz-flex: initial;
+    -ms-flex: initial;
+    flex: initial;
+    padding: 0 10px;
+    width: auto;
+    min-width: 90px;
+    font-size: 14px;
+  }
+  .form10{
+      font-weight: bold;
+  }
+  .custom-control-label{
+      padding: 5px;
+  }

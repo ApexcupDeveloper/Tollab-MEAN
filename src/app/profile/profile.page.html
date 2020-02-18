@@ -1,0 +1,613 @@
+<app-nav-bar></app-nav-bar>
+
+<ion-content color="tertiary">
+    <ion-grid class="top-container">
+        <ion-row class="ion-justify-content-center ion-align-items-center">
+            <ion-col size="10" sizeSm="12" sizeXs="12">
+                <ion-grid *ngIf="(authService.currentUser | async) || {displayName: 'misc.guest',
+                                        photoURL: 'assets/svg/iconfinder_male3_403019.svg'} as user">
+                    <ion-row class="ion-padding-bottom top-row">
+                        <ion-col class="ion-padding-end ion-text-center user-avatar-column" size="auto">
+                            <div class="avatar-container">
+                                <ion-avatar class="user-avatar">
+                                    <img [src]="user.photoURL ? user.photoURL : 'assets/svg/iconfinder_male3_403019.svg'"
+                                         alt="Profile Image">
+                                </ion-avatar>
+                                <div class="picture-upload" (click)="onDisplayModal('image')">
+                                    <ion-icon name="camera"></ion-icon>
+                                    {{ 'profile.changePicture' | translate }}
+                                </div>
+                            </div>
+                            <!-- TODO: Re-add the button here and decide if it is for uploading or downloading. -->
+                            <!--<ion-button margin-vertical color="light" mode="ios">
+                                <ion-icon name="clipboard" slot="start"></ion-icon>
+                                <span>Upload Resume</span>
+                            </ion-button>-->
+                        </ion-col>
+                        <ion-col class="ion-no-padding ion-padding-start"
+                                 *ngIf="(studentData | async) as studentData" [formGroup]="basicInfoForm">
+                            <div class="user-full-name-and-edit-button-container">
+                                <div class="d-flex">
+                                    <h1 class="user-full-name">{{ user.displayName | translate }}</h1>
+                                    <ion-button slot="icon-only" fill="clear" size="small"
+                                                class="ion-no-padding translate-y-206" *ngIf="!basicInfoEditMode"
+                                                (click)="basicInfoEditMode = !basicInfoEditMode;">
+                                        <ion-icon color="light" name="create"></ion-icon>
+                                    </ion-button>
+                                </div>
+                            </div>
+                            <div class="bio-container">
+                                <ion-label>
+                                    <h1 padding-end class="biography">
+                                        <span class="bio">{{ 'profile.bio' | translate }}</span><span
+                                            class="graphy">{{ 'profile.graphy' | translate }}</span>
+                                    </h1>
+                                    <p *ngIf="!basicInfoEditMode">{{ studentData?.biography?.length ? studentData.biography : 'profile.bioPlaceHolder' | translate }}</p>
+                                    <ion-textarea auto-grow [placeholder]="'profile.bioPlaceHolder' | translate"
+                                                  *ngIf="basicInfoEditMode"
+                                                  class="orange-background-textarea" formControlName="biography"
+                                                  [value]="studentData?.biography"></ion-textarea>
+                                </ion-label>
+                                <ion-buttons class="ion-padding-vertical ion-justify-content-end"
+                                             *ngIf="basicInfoEditMode">
+                                    <ion-button slot="end"
+                                                (click)="basicInfoEditMode = false">{{ 'profile.cancel' | translate }}
+                                    </ion-button>
+                                    <ion-button slot="end" (click)="onSaveBasicInfo()"
+                                                [disabled]="basicInfoForm.invalid">
+                                        {{ 'profile.save' | translate }}
+                                    </ion-button>
+                                </ion-buttons>
+                            </div>
+                            <!-- TODO: Re-add Location -->
+                            <!--<ion-label>
+                                <h1 padding-end padding-top>Location</h1>
+                                <p *ngIf="!basicInfoEditMode">
+                                    <ion-icon name="pin"></ion-icon>
+                                    {{ location }}</p>
+                                <ion-searchbar *ngIf="basicInfoEditMode" class="searchbar-light"
+                                               showCancelButton="focus" autocomplete="on"
+                                               animated (ionInput)="onSearchPlace()"
+                                               (ionCancel)="basicInfoEditMode = true"></ion-searchbar>
+                                <ion-list *ngIf="places.length">
+                                    <ion-item *ngFor="let place of places">
+                                        {{ place }}
+                                    </ion-item>
+                                </ion-list>
+                            </ion-label>-->
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid class="central-container">
+        <ion-row class="ion-justify-content-center" *ngIf="(studentData | async) as studentData">
+            <ion-col sizeMd="10" sizeXl="8">
+                <ion-grid class="central-wrapper">
+                    <ion-row>
+                        <!-- Left column of the central panel -->
+                        <ion-col>
+                            <!-- Education -->
+                            <ion-card padding>
+                                <ion-card-title>
+                                    <ion-label>
+                                        <ion-icon [name]="cards.education.icon" slot="start"></ion-icon>
+                                        {{ cards.education.title | translate}}
+                                    </ion-label>
+                                    <ion-button fill="clear" size="small" no-padding
+                                                (click)="onDisplayModal('education')">
+                                        <ion-icon
+                                                [name]="studentData.hasOwnProperty('education') && studentData.degrees.length ? 'create' : 'add'"></ion-icon>
+                                    </ion-button>
+                                </ion-card-title>
+                                <ion-card-content>
+                                    <div *ngFor="let degree of (studentData.hasOwnProperty('degrees') ? studentData.degrees : []); let i = index;">
+                                        <ion-item button detail="false" lines="full"
+                                                  (click)="onDisplayDetails('education', i)">
+                                            <ion-label>
+                                                <h2>{{ degree.school }}</h2>
+                                                <p padding-start
+                                                   *ngFor="let major of degree.majors">{{ major }}</p>
+                                            </ion-label>
+                                            <ion-buttons slot="end">
+                                                <a class="item-edit-anchor"
+                                                   (click)="onDisplayModal('education', i, degree, studentData.degrees.length)">
+                                                    <ion-icon name="create"></ion-icon>
+                                                </a>
+                                            </ion-buttons>
+                                        </ion-item>
+                                        <app-card-details
+                                                [details]="[
+                                                {
+                                                title: 'Enrollment Date',
+                                                value: (degree.enrollDate | date:'dd-MM-yyyy')
+                                                },
+                                                {
+                                                title: (degree.current ? 'Expected ' : '') + 'Graduation Date',
+                                                value: (degree.graduationDate | date: 'dd-MM-yyyy')
+                                                }
+                                                ]"
+                                                [currentDetails]="{card: 'education', index: i}"
+                                                [activeDetails]="displayedDetailsList">
+                                        </app-card-details>
+                                    </div>
+                                </ion-card-content>
+                            </ion-card>
+
+                            <!-- Fun Facts -->
+                            <ion-card padding class="orange-card">
+                                <ion-card-title>
+                                    <ion-label>
+                                        <ion-icon [name]="cards.funFacts.icon"></ion-icon>
+                                        {{ cards.funFacts.title | translate}}
+                                    </ion-label>
+                                    <ion-button color="light" fill="clear" size="small" no-padding
+                                                (click)="cards.funFacts.editMode = !cards.funFacts.editMode;">
+                                        <ion-icon name="create"></ion-icon>
+                                    </ion-button>
+                                </ion-card-title>
+                                <ion-card-content>
+                                    <p *ngIf="cards.funFacts.editMode ? false : (studentData.hasOwnProperty('funFacts') &&
+                                     studentData.funFacts.length ? studentData.funFacts : cards.funFacts.dummyText | translate) as funFacts">{{ funFacts }}</p>
+                                    <ion-textarea maxlength="150" auto-grow
+                                                  [placeholder]="cards.funFacts.dummyText | translate"
+                                                  class="orange-background-textarea" [formControl]="funFactsControl"
+                                                  [value]="studentData.hasOwnProperty('funFacts') ? studentData.funFacts : ''"
+                                                  *ngIf="cards.funFacts.editMode"></ion-textarea>
+                                    <ion-buttons justify-content-end *ngIf="cards.funFacts.editMode">
+                                        <ion-button
+                                                (click)="cards.funFacts.editMode = false">{{ 'profile.cancel' | translate }}</ion-button>
+                                        <ion-button
+                                                (click)="onSave('funFacts', studentData)">{{ 'profile.save' | translate }}</ion-button>
+                                    </ion-buttons>
+                                </ion-card-content>
+                            </ion-card>
+
+                            <!-- Skills -->
+                            <ion-card padding>
+                                <ion-card-title>
+                                    <ion-label>
+                                        <ion-icon [name]="cards.skills.icon"></ion-icon>
+                                        {{ cards.skills.title | translate }}
+                                    </ion-label>
+                                    <ion-button fill="clear" size="small" no-padding
+                                                (click)="studentData.hasOwnProperty('skills')
+                                                && studentData.skills.languages
+                                                .concat(studentData.skills.technical, studentData.skills.mySkills).length
+                                                ? onDisplayModal('skills', 0, {
+                                                languages: studentData.skills.languages.slice(),
+                                                technical: studentData.skills.technical.slice(),
+                                                mySkills: studentData.skills.mySkills.slice()
+                                                }) : onDisplayModal('skills')">
+                                        <ion-icon
+                                                [name]="studentData.hasOwnProperty('skills') && studentData.skills.languages
+                                                .concat(studentData.skills.technical, studentData.skills.mySkills)
+                                                .length ? 'create' : 'add'"></ion-icon>
+                                    </ion-button>
+                                </ion-card-title>
+                                <ion-card-content>
+
+                                    <ion-label
+                                            *ngIf="studentData.hasOwnProperty('skills') &&
+                                            studentData.skills.languages.length">
+                                        <ion-icon name="chatbubbles"></ion-icon>
+                                        {{ 'profile.languages' | translate}}
+                                    </ion-label>
+                                    <div>
+                                        <ion-chip *ngFor="let skill of (studentData.hasOwnProperty('skills') ?
+                                            studentData.skills.languages : [])">
+                                            <ion-label>{{ skill }}</ion-label>
+                                            <ion-icon name="close" *ngIf="cards.skills.editMode"></ion-icon>
+                                        </ion-chip>
+                                    </div>
+
+                                    <ion-label
+                                            *ngIf="studentData.hasOwnProperty('skills') &&
+                                            studentData.skills.technical.length">
+                                        <ion-icon name="laptop"></ion-icon>
+                                        Technical Skills
+                                    </ion-label>
+                                    <div>
+                                        <ion-chip *ngFor="let skill of (studentData.hasOwnProperty('skills') ?
+                                            studentData.skills.technical : [])">
+                                            <ion-label>{{ skill }}</ion-label>
+                                            <ion-icon name="close" *ngIf="cards.skills.editMode"></ion-icon>
+                                        </ion-chip>
+                                    </div>
+
+                                    <ion-label
+                                            *ngIf="studentData.hasOwnProperty('skills') &&
+                                            studentData.skills.mySkills.length">
+                                        <ion-icon name="walk"></ion-icon>
+                                        Other Skills
+                                    </ion-label>
+                                    <div>
+                                        <ion-chip *ngFor="let skill of (studentData.hasOwnProperty('skills') ?
+                                            studentData.skills.mySkills : [])">
+                                            <ion-label>{{ skill }}</ion-label>
+                                            <ion-icon name="close" *ngIf="cards.skills.editMode"></ion-icon>
+                                        </ion-chip>
+                                    </div>
+
+                                    <p *ngIf="!cards.skills.editMode && (!studentData.hasOwnProperty('skills') ||
+                                        !studentData.skills.languages.concat(studentData.skills.technical, studentData.skills
+                                        .mySkills).length)">{{ cards.skills.dummyText | translate }}</p>
+                                </ion-card-content>
+                            </ion-card>
+
+                            <!-- Volunteer -->
+                            <ion-card padding>
+                                <ion-card-title>
+                                    <ion-label>
+                                        <ion-icon [name]="cards.volunteer.icon"></ion-icon>
+                                        {{ cards.volunteer.title | translate }}
+                                    </ion-label>
+                                    <ion-button fill="clear" size="small" no-padding
+                                                (click)="onDisplayModal('volunteer')">
+                                        <ion-icon name="add"></ion-icon>
+                                    </ion-button>
+                                </ion-card-title>
+                                <ion-card-content>
+                                    <div *ngFor="let volunteerWork of (studentData.hasOwnProperty('volunteer') ? studentData.volunteer : []); let i = index;">
+                                        <ion-item button detail="false" lines="full"
+                                                  (click)="onDisplayDetails('volunteer', i)">
+                                            <ion-thumbnail slot="start">
+                                                <p class="ion-text-center org-initial">{{ volunteerWork.organization.charAt(0) }}</p>
+                                            </ion-thumbnail>
+                                            <ion-label>
+                                                <h2>{{ volunteerWork.organization }}</h2>
+                                            </ion-label>
+                                            <ion-buttons slot="end">
+                                                <a class="item-edit-anchor"
+                                                   (click)="onDisplayModal('volunteer', i, volunteerWork)">
+                                                    <ion-icon name="create"></ion-icon>
+                                                </a>
+                                            </ion-buttons>
+                                        </ion-item>
+                                        <app-card-details
+                                                [details]="[
+                                                volunteerWork.startDate ? {
+                                                title: ('profile.startDate' | translate),
+                                                value: (volunteerWork.startDate | date:'dd-MM-yyyy')
+                                                } : null,
+                                                volunteerWork.endDate ? {
+                                                title: ('profile.endDate' | translate),
+                                                value: (volunteerWork.endDate | date: 'dd-MM-yyyy')
+                                                } : null,
+                                                volunteerWork.details ? {
+                                                title:('profile.details' | translate),
+                                                value: volunteerWork.details
+                                                } : null
+                                                ]"
+                                                [currentDetails]="{card: 'volunteer', index: i}"
+                                                [activeDetails]="displayedDetailsList">
+                                        </app-card-details>
+                                    </div>
+                                    <p *ngIf="!studentData.hasOwnProperty('volunteer') || !studentData.volunteer.length">{{ cards.volunteer.dummyText | translate }}</p>
+                                </ion-card-content>
+                            </ion-card>
+
+                            <!-- Awards and Achievements -->
+                            <ion-card padding>
+                                <ion-card-title>
+                                    <ion-label>
+                                        <ion-icon [name]="cards.awardsAndAchievements.icon"></ion-icon>
+                                        {{ cards.awardsAndAchievements.title | translate }}
+                                    </ion-label>
+                                    <ion-button fill="clear" size="small" no-padding
+                                                (click)="onDisplayModal('awardsAndAchievements')">
+                                        <ion-icon name="add"></ion-icon>
+                                    </ion-button>
+                                </ion-card-title>
+                                <ion-card-content>
+                                    <div *ngFor="let award of (studentData.hasOwnProperty('awardsAndAchievements') ? studentData.awardsAndAchievements : []); let i = index;">
+                                        <ion-item button detail="false" lines="full"
+                                                  (click)="onDisplayDetails('awardsAndAchievements', i)">
+                                            <ion-label>
+                                                <h2>{{ award.title }}</h2>
+                                                <p padding-start>{{ award.date | date:'dd-MM-yyyy'}}</p>
+                                            </ion-label>
+                                            <ion-buttons slot="end">
+                                                <a class="item-edit-anchor"
+                                                   (click)="onDisplayModal('awardsAndAchievements', i, award)">
+                                                    <ion-icon name="create"></ion-icon>
+                                                </a>
+                                            </ion-buttons>
+                                        </ion-item>
+                                        <app-card-details
+                                                [details]="[
+                                                award.details ? {
+                                                title: ('profile.details' | translate),
+                                                value: award.details
+                                                } : null
+                                                ]"
+                                                [currentDetails]="{card: 'awardsAndAchievements', index: i}"
+                                                [activeDetails]="displayedDetailsList">
+                                        </app-card-details>
+                                    </div>
+                                    <p *ngIf="!studentData.hasOwnProperty('awardsAndAchievements') || !studentData.awardsAndAchievements.length">{{ cards.awardsAndAchievements.dummyText | translate}}</p>
+                                </ion-card-content>
+                            </ion-card>
+
+                            <!-- Videos -->
+                            <ion-card padding>
+                                <ion-card-title>
+                                    <ion-label>
+                                        <ion-icon [name]="cards.videos.icon"></ion-icon>
+                                        {{ cards.videos.title | translate}}
+                                    </ion-label>
+                                    <ion-button fill="clear" size="small" no-padding (click)="onDisplayModal('videos')">
+                                        <ion-icon name="add"></ion-icon>
+                                    </ion-button>
+                                </ion-card-title>
+                                <ion-card-content>
+                                    <div class="video-item"
+                                         *ngFor="let video of (studentData.hasOwnProperty('videos') ? studentData.videos : []); let i = index;">
+                                        <ion-item button detail="false" lines="full"
+                                                  (click)="onDisplayDetails('videos', i)">
+                                            <ion-img slot="start" [src]="video.thumbnailURL"
+                                                     alt="Youtube Video Thumbnail"></ion-img>
+                                            <ion-label>{{ video.title }}</ion-label>
+                                            <ion-buttons slot="end">
+                                                <a class="item-edit-anchor"
+                                                   (click)="onDisplayModal('videos', i, video)">
+                                                    <ion-icon name="create"></ion-icon>
+                                                </a>
+                                            </ion-buttons>
+                                        </ion-item>
+                                        <app-card-details
+                                                [details]="[
+                                                video.description ? {
+                                                title: ('profile.description' | translate),
+                                                value: video.description
+                                                } : null
+                                                ]"
+                                                [currentDetails]="{card: 'videos', index: i}"
+                                                [activeDetails]="displayedDetailsList">
+                                        </app-card-details>
+                                    </div>
+                                    <p *ngIf="!studentData.hasOwnProperty('videos') || !studentData.videos.length">{{ cards.videos.dummyText | translate}}</p>
+                                </ion-card-content>
+                            </ion-card>
+                        </ion-col>
+                        <!-- Right column of the central panel -->
+                        <ion-col>
+                            <!-- Work Experience -->
+                            <ion-card padding>
+                                <ion-card-title>
+                                    <ion-label>
+                                        <ion-icon [name]="cards.workExperience.icon"></ion-icon>
+                                        {{ cards.workExperience.title | translate }}
+                                    </ion-label>
+                                    <ion-button fill="clear" size="small" no-padding
+                                                (click)="onDisplayModal('workExperience')">
+                                        <ion-icon name="add"></ion-icon>
+                                    </ion-button>
+                                </ion-card-title>
+                                <ion-card-content>
+                                    <div *ngFor="let job of (studentData.hasOwnProperty('workExperience') ? studentData.workExperience : []); let i = index;">
+                                        <ion-item button detail="false" lines="full"
+                                                  (click)="onDisplayDetails('workExperience', i)">
+                                            <ion-thumbnail slot="start">
+                                                <ion-img [src]="'https://logo.clearbit.com/' + job.website"
+                                                         *ngIf="job.website && !noImage"
+                                                         (ionError)="noImage = true"></ion-img>
+                                                <p *ngIf="!job.website || noImage"
+                                                   class="ion-text-center org-initial">{{ job.company.charAt(0) }}</p>
+                                            </ion-thumbnail>
+                                            <ion-label>
+                                                <h2>{{ job.company }}</h2>
+                                                <p padding-start>{{ job.position }}</p>
+                                            </ion-label>
+                                            <ion-buttons slot="end">
+                                                <a class="item-edit-anchor"
+                                                   (click)="onDisplayModal('workExperience', i, job)">
+                                                    <ion-icon name="create"></ion-icon>
+                                                </a>
+                                            </ion-buttons>
+                                        </ion-item>
+                                        <app-card-details
+                                                [details]="[
+                                                job.startDate ? {
+                                                title: ('profile.startDate' | translate),
+                                                value: (job.startDate | date:'dd-MM-yyyy')
+                                                } : null,
+                                                job.current && job.endDate ? {
+                                                title: ('profile.endDate' | translate),
+                                                value: (job.endDate | date: 'dd-MM-yyyy')
+                                                } : null,
+                                                job.details ? {
+                                                title: ('profile.details' | translate),
+                                                value: job.details
+                                                } : null
+                                                ]"
+                                                [currentDetails]="{card: 'workExperience', index: i}"
+                                                [activeDetails]="displayedDetailsList">
+                                        </app-card-details>
+                                    </div>
+                                    <p *ngIf="!studentData.hasOwnProperty('workExperience') ||
+                                        !studentData.workExperience.length">
+                                        {{ cards.workExperience.dummyText | translate }}</p>
+                                </ion-card-content>
+                            </ion-card>
+
+                            <!-- Passion -->
+                            <ion-card padding class="orange-card">
+                                <ion-card-title>
+                                    <ion-label>
+                                        <ion-icon [name]="cards.passion.icon"></ion-icon>
+                                        {{ cards.passion.title  | translate}}
+                                    </ion-label>
+                                    <ion-button color="light" fill="clear" size="small" no-padding
+                                                (click)="cards.passion.editMode = !cards.passion.editMode;">
+                                        <ion-icon name="create"></ion-icon>
+                                    </ion-button>
+                                </ion-card-title>
+                                <ion-card-content>
+                                    <p *ngIf="cards.passion.editMode ? false : (studentData.hasOwnProperty('passion') && studentData.passion.length ?
+                                     studentData.passion : cards.passion.dummyText | translate) as passion">{{ passion }}</p>
+                                    <ion-textarea maxlength="150" auto-grow
+                                                  [placeholder]="cards.passion.dummyText | translate"
+                                                  class="orange-background-textarea" [formControl]="passionControl"
+                                                  [value]="studentData.hasOwnProperty('passion') ? studentData.passion : ''"
+                                                  *ngIf="cards.passion.editMode"></ion-textarea>
+                                    <ion-buttons justify-content-end *ngIf="cards.passion.editMode">
+                                        <ion-button (click)="cards.passion.editMode = false">Cancel</ion-button>
+                                        <ion-button (click)="onSave('passion', studentData)">Save</ion-button>
+                                    </ion-buttons>
+                                </ion-card-content>
+                            </ion-card>
+
+                            <!-- Gigs / Freelance -->
+                            <ion-card padding>
+                                <ion-card-title>
+                                    <ion-label>
+                                        <ion-icon [name]="cards.gigsAndFreelance.icon"></ion-icon>
+                                        {{ cards.gigsAndFreelance.title | translate}}
+                                    </ion-label>
+                                    <ion-button fill="clear" size="small" no-padding
+                                                (click)="onDisplayModal('gigsAndFreelance')">
+                                        <ion-icon name="add"></ion-icon>
+                                    </ion-button>
+                                </ion-card-title>
+                                <ion-card-content>
+                                    <div *ngFor="let gig of (studentData.hasOwnProperty('gigsAndFreelance') ? studentData.gigsAndFreelance : []); let i = index;">
+                                        <ion-item button detail="false" lines="full"
+                                                  (click)="onDisplayDetails('gigsAndFreelance', i)">
+                                            <ion-thumbnail slot="start">
+                                                <p class="ion-text-center org-initial">{{ gig.company.charAt(0) }}</p>
+                                            </ion-thumbnail>
+                                            <ion-label>
+                                                <h2>{{ gig.company }}</h2>
+                                                <p padding-start>{{ gig.title }}</p>
+                                            </ion-label>
+                                            <ion-buttons slot="end">
+                                                <a class="item-edit-anchor"
+                                                   (click)="onDisplayModal('gigsAndFreelance', i, gig)">
+                                                    <ion-icon name="create"></ion-icon>
+                                                </a>
+                                            </ion-buttons>
+                                        </ion-item>
+                                        <app-card-details
+                                                [details]="[
+                                                gig.startDate ? {
+                                                title: ('profile.startDate' | translate),
+                                                value: (gig.startDate | date:'dd-MM-yyyy')
+                                                } : null,
+                                                gig.endDate ? {
+                                                title: ('profile.endDate' | translate),
+                                                value: (gig.endDate | date:'dd-MM-yyyy')
+                                                } : null,
+                                                gig.details ? {
+                                                title: ('profile.details' | translate),
+                                                value: gig.details
+                                                } : null
+                                                ]"
+                                                [currentDetails]="{card: 'gigsAndFreelance', index: i}"
+                                                [activeDetails]="displayedDetailsList">
+                                        </app-card-details>
+                                    </div>
+                                    <p *ngIf="!studentData.hasOwnProperty('gigsAndFreelance') || !studentData.gigsAndFreelance.length">{{ cards.gigsAndFreelance.dummyText | translate}}</p>
+                                </ion-card-content>
+                            </ion-card>
+
+                            <!-- Leadership -->
+                            <ion-card padding>
+                                <ion-card-title>
+                                    <ion-label>
+                                        <ion-icon [name]="cards.leadership.icon"></ion-icon>
+                                        {{ cards.leadership.title | translate}}
+                                    </ion-label>
+                                    <ion-button fill="clear" size="small" no-padding
+                                                (click)="onDisplayModal('leadership')">
+                                        <ion-icon name="add"></ion-icon>
+                                    </ion-button>
+                                </ion-card-title>
+                                <ion-card-content>
+                                    <div *ngFor="let lead of (studentData.hasOwnProperty('leadership') ? studentData.leadership : []); let i = index;">
+                                        <ion-item button detail="false" lines="full"
+                                                  (click)="onDisplayDetails('leadership', i)">
+                                            <ion-thumbnail slot="start">
+                                                <p class="ion-text-center org-initial">{{ lead.organization.charAt(0) }}</p>
+                                            </ion-thumbnail>
+                                            <ion-label>
+                                                <h2>{{ lead.organization }}</h2>
+                                                <p padding-start>{{ lead.title }}</p>
+                                            </ion-label>
+                                            <ion-buttons slot="end">
+                                                <a class="item-edit-anchor"
+                                                   (click)="onDisplayModal('leadership', i, lead)">
+                                                    <ion-icon name="create"></ion-icon>
+                                                </a>
+                                            </ion-buttons>
+                                        </ion-item>
+                                        <app-card-details
+                                                [details]="[
+                                                lead.startDate ? {
+                                                title: ('profile.startDate' | translate),
+                                                value: (lead.startDate | date:'dd-MM-yyyy')
+                                                } : null,
+                                                lead.endDate ? {
+                                                title: ('profile.endDate' | translate),
+                                                value: (lead.endDate | date:'dd-MM-yyyy')
+                                                } : null,
+                                                lead.details ? {
+                                                title: ('profile.details' | translate),
+                                                value: lead.details
+                                                } : null
+                                                ]"
+                                                [currentDetails]="{card: 'leadership', index: i}"
+                                                [activeDetails]="displayedDetailsList">
+                                        </app-card-details>
+                                    </div>
+                                    <p *ngIf="!studentData.hasOwnProperty('leadership') || !studentData.leadership.length">{{ cards.leadership.dummyText | translate }}</p>
+                                </ion-card-content>
+                            </ion-card>
+
+                            <!-- Hobbies -->
+                            <ion-card padding>
+                                <ion-card-title>
+                                    <ion-label>
+                                        <ion-icon [name]="cards.hobbies.icon"></ion-icon>
+                                        {{ cards.hobbies.title | translate }}
+                                    </ion-label>
+                                    <ion-button fill="clear" size="small" no-padding
+                                                (click)="studentData.hasOwnProperty('hobbies') && studentData.hobbies.length ? onDisplayModal('hobbies', 0, studentData.hobbies.slice()) : onDisplayModal('hobbies')">
+                                        <ion-icon
+                                                [name]="studentData.hasOwnProperty('hobbies') && studentData.hobbies.length ? 'create' : 'add'"></ion-icon>
+                                    </ion-button>
+                                </ion-card-title>
+                                <ion-card-content>
+                                    <ion-chip *ngFor="let hobby of (studentData.hasOwnProperty('hobbies') ?
+                                             studentData.hobbies : [])">
+                                        <ion-label>{{ hobby }}</ion-label>
+                                        <ion-icon name="close" *ngIf="cards.hobbies.editMode"></ion-icon>
+                                    </ion-chip>
+                                    <ion-chip *ngIf="cards.hobbies.editMode">
+                                        <ion-icon name="add" no-margin></ion-icon>
+                                    </ion-chip>
+                                    <p *ngIf="!studentData.hasOwnProperty('hobbies') || !studentData.hobbies.length">{{ cards.hobbies.dummyText | translate }}</p>
+                                </ion-card-content>
+                            </ion-card>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-col>
+            <ion-col size="auto">
+                <ion-card class="progress-bar-container">
+                    <ion-card-content>
+                        <circle-progress [percent]="completeness.percentage"
+                                         [subtitleFormat]="formatSubtitle"></circle-progress>
+                        <p text-center>{{ completeness.hint | async }}</p>
+                    </ion-card-content>
+                </ion-card>
+                <!-- This empty division element is only there to allow the progress
+                 bar to stick using the sticky value of the position property -->
+                <div></div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <app-footer></app-footer>
+</ion-content>

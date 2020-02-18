@@ -1,0 +1,69 @@
+<ion-grid class="ion-padding modal-content" [formGroup]="form">
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">{{ 'profile.modals.education.university' | translate }}</ion-label>
+                <ion-input formControlName="school"></ion-input>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row formArrayName="majors">
+        <ion-col *ngFor="let control of getMajorsFormArray().controls; let i = index;">
+            <ion-item>
+                <ion-label position="floating">{{ 'profile.modals.education.major' | translate }} {{ i + 1 }}</ion-label>
+                <ion-input [formControlName]="'' + i"></ion-input>
+            </ion-item>
+        </ion-col>
+        <ion-col size="auto" align-self-center>
+            <ion-button shape="round" no-padding *ngIf="getMajorsFormArray().controls.length > 1"
+                        (click)="onRemoveMajor()">
+                <ion-icon name="remove"></ion-icon>
+            </ion-button>
+            <ion-button shape="round" no-padding *ngIf="getMajorsFormArray().controls.length < 2"
+                        (click)="onAddMajor()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">{{ 'profile.modals.education.enrollmentDate' | translate }}</ion-label>
+                <ion-datetime formControlName="enrollDate"
+                              [max]="profileDataService.today | date:'yyyy-MM-dd'"></ion-datetime>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label>{{ 'profile.modals.education.currStudying' | translate }}</ion-label>
+                <ion-checkbox formControlName="current"></ion-checkbox>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">{{ 'profile.modals.education.graduationDate' | translate }}<span
+                        *ngIf="form.controls.current.value"> (Expected)</span></ion-label>
+                <ion-datetime formControlName="graduationDate"
+                              [max]="profileDataService.twentyYearsLater | date:'yyyy-MM-dd'"></ion-datetime>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row padding justify-content-between>
+        <ion-col size="auto">
+            <ion-buttons>
+                <ion-button color="danger" *ngIf="editMode && size > 1" (click)="onDelete()">{{ 'profile.modals.education.delete' | translate }}
+                </ion-button>
+            </ion-buttons>
+        </ion-col>
+        <ion-col size="auto">
+            <ion-buttons>
+                <ion-button color="primary" (click)="onCancel()">{{ 'profile.modals.education.cancel' | translate }}</ion-button>
+                <ion-button color="primary" (click)="onSave()" [disabled]="form.invalid">{{ 'profile.modals.education.save' | translate }}</ion-button>
+            </ion-buttons>
+        </ion-col>
+    </ion-row>
+</ion-grid>

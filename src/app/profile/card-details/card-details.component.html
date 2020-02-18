@@ -1,0 +1,8 @@
+<div class="details" padding-horizontal @flyInOut *ngIf="isActive((activeDetails | async))">
+    <ion-item lines="none" *ngFor="let detail of filterDetails(details)">
+        <ion-label>
+            <h3>{{ detail.title }}</h3>
+            <p padding-start>{{ detail.value }}</p>
+        </ion-label>
+    </ion-item>
+</div>

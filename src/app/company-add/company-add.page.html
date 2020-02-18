@@ -1,0 +1,125 @@
+<app-nav-bar></app-nav-bar>
+
+<ion-content>
+  <div class="container card bg-light text-dark" style="margin: 50px; padding: 50px; max-width: 60%; margin: auto;">
+    <div class="row">
+      <div class="col">
+        <h5>Start your company pfofile</h5>
+        <p>Add a neam, images and other important details to build your company's profile</p>
+        <div>
+          <label class="form10" for="form10">Company name</label>
+          <input type="text" class="form-control" [(ngModel)]="company_name" id="e_firstname" />
+        </div>
+        <div>
+          <ion-grid *ngIf="(authService.currentUser | async) || {displayName: 'misc.guest',
+                                              logoURL: 'assets/img/user.png'} as user">
+            <ion-col class="ion-padding-end ion-text-center user-avatar-column" size="auto">
+              <div class="user-avatar">
+                <img style="width: 100px; height: 100px;  object-fit: cover;"
+                  [src]="user.logoURL ? user.logoURL : 'assets/img/user.png'" alt="Profile Image">
+              </div>
+              <div class="picture-upload" (click)="onDisplayModal('image')">
+                <ion-icon name="camera"></ion-icon>
+                Company Logo
+              </div>
+            </ion-col>
+          </ion-grid>
+        </div>
+        <div style="width: 80%;margin: auto; text-align: center;">
+          <p>This is the main image associated with your coompany. Make it count!</p>
+        </div>
+        <div>
+          <ion-grid *ngIf="(authService.currentUser | async) || {displayName: 'misc.guest',
+                                              bannerURL: 'assets/img/YoungPros.jpg'} as user">
+            <ion-col class="ion-padding-end ion-text-center user-avatar-column" size="auto">
+              <div class="user-avatar" style="height: 150px;">
+                <img style="height:150px; width: 100%;  object-fit: cover; background-position: center;"
+                  [src]="user.bannerURL ? user.bannerURL : 'assets/img/YoungPros.jpg'" alt="Profile Image">
+              </div>
+              <div class="picture-upload" (click)="onDisplayModal1('image')">
+                <ion-icon name="camera"></ion-icon>
+                Banner Image
+              </div>
+            </ion-col>
+          </ion-grid>
+        </div>
+        <div style="width: 80%;margin: auto; text-align: center;">
+          <p>This is the background image that will display on the profile</p>
+        </div>
+        <div>
+          <label class="form10" for="form10">Industry</label>
+          <input type="text" class="form-control" [(ngModel)]="industry" id="e_number" />
+        </div>
+        <div>
+          <label class="form10" for="form10">Website</label>
+          <input type="text" class="form-control" [(ngModel)]="website" id="job_title" />
+        </div>
+        <div>
+          <p>The company's main web presence. Alternatively, you can use a public page on Gacebook, Yelp, etc.</p>
+        </div>
+        <div>
+          <label class="form10" for="form10">Location</label>
+          <input type="text" class="form-control" [(ngModel)]="com_location" id="job_title" />
+        </div>
+        <div class="md-form">
+          <label class="form10" for="form10">Description</label>
+          <textarea id="form10" class="md-textarea form-control" [(ngModel)]="description" rows="3"></textarea>
+          <p>students read company descriptions to learn what you do and who you are. Make it count</p>
+        </div>
+        <div>
+          <label class="form10" for="form10">Company Size</label>
+          <select class="form-control" [(ngModel)]="size" id="sel1">
+            <option>1 ~ 9</option>
+            <option>10 ~ 99</option>
+            <option>100 ~ 999</option>
+            <option>1000 +</option>
+          </select>
+          <p>Choose one of the given options</p>
+        </div>
+        <div>
+          <label class="form10" for="form10">Public Email</label>
+          <input type="text" class="form-control" [(ngModel)]="email" id="job_title" />
+          <p>What is your company's public facing careers email address?</p>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <ion-button color="light" href="#">Go Back</ion-button>
+            </div>
+            <div class="col save" style="align-items: flex-end;">
+              <ion-button color="secondary" (click)="goCreate()" style="float: right;">Create New Company</ion-button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="divider"></div>
+      <div class="col" style="max-width: 35%;">
+        <div>
+          <label>Logo preview</label>
+          <p>This is how your company's name and logo will display when students search for your profile or jobs.</p>
+        </div>
+        <div class="card">
+          <div class="card-header" style="padding: 0px;">
+            <div class="row">
+              <div class="col-md-4">
+                <img style="width: 50px; height: 50px;  object-fit: cover;"
+                  [src]="'assets/img/user.png'" alt="Profile Image">
+              </div>
+              <div class="col-md-8" style="text-align: center; margin:auto;">
+                <label style="padding-bottom: 0em;">Company Name</label>
+              </div>
+            </div>
+          </div>
+          <div class="card-body" style="padding: 0px; text-align: center;">
+            <img src="../../assets/img/YoungPros.jpg"
+              style="object-fit: cover; height: 80px; width: 100%; background-position: center;">
+            <p style="padding-top: 10px;">
+              Our company is manufactured Mobile development.
+            </p>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+  <app-footer></app-footer>
+</ion-content>

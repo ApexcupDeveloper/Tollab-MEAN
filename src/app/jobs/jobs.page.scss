@@ -1,0 +1,40 @@
+
+.vertical {
+  display: flex;
+}
+.vertical-center {
+  justify-items: start;
+  align-items: center;
+}
+
+.checkbox-style {
+  display: flex; 
+  align-items: center; 
+  justify-content: flex-start;
+}
+
+.checkbox-style-par {
+  border: 0.5px solid #ced4da;
+  display: flex; 
+  width: 25%;
+}
+
+.btn .btn-sm {
+  margin: 10px; 
+  margin-right: 0; 
+}
+select, input, p, label{
+  font-size: small;
+  margin-bottom: 5px;
+}
+.com_name{
+  font-size: 23px;
+}
+.input-group-text{
+  font-size: small;
+}
+.text-dark{
+  width:263px;
+  height: 250px; 
+  margin: 5px;
+}

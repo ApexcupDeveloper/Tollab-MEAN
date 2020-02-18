@@ -1,0 +1,51 @@
+<div class="card" style="width: 700px; height: 600px; overflow: auto;">
+  <div class="card-header">
+    <h4>{{this.title}}</h4>
+  </div>
+  <div class="card-body" style="width: 100%; height: auto; overflow: auto;">
+      <div style="padding: 30px; ">
+          <div class="card col card-description">
+            <div class="card-body">
+              <div>
+                <h5 class="card-title perks">About this Job</h5>
+                <p>{{ListArray}}</p>
+              </div>
+              <div>
+                <h5 class="card-title perks">Who We Are?</h5>
+                <p>{{descript}}</p>
+              </div>
+              <div>
+                <h5 class="card-title perks">Company Name</h5>
+                <p>{{name}}</p>
+              </div>
+              <div>
+                <h5 class="card-title perks">Location</h5>
+                <p>{{com_location}}</p>
+              </div>
+              <div>
+                <h5 class="card-title perks">Industry</h5>
+                <p>{{industry}}</p>
+              </div>
+              <div>
+                <h5 class="card-title perks">Contact Us</h5>
+                <p>{{email}}</p>
+              </div>
+            </div>
+          </div>
+          
+        <!-- <div style="width: 100%; height: 300px; margin: auto; padding-top: 20px;">
+          <youtube-player videoId="dQw4w9WgXcQ" suggestedQuality="highres" [height]="600" [width]="1080"
+            [startSeconds]="43" [endSeconds]="60">
+          </youtube-player>
+        </div> -->
+      </div>
+  </div>
+  <div class="card-footer" *ngIf="this.authService.currentUserData.role=='student'">
+    <div>
+      <button class="btn btn-info btn-sm" *ngIf="!flag" style="width: 100px; float: right;" (click)="goApply()">Apply</button>
+        <button class="btn btn-info btn-sm " *ngIf="flag" style="width: 100px; float: right;" disabled>Applied</button>
+    </div>
+    <button class="btn  btn-outline-info btn-sm" style="width: 100px; float: left;" (click)="modalCtrl.dismiss()">Close</button>
+  </div>
+
+</div>

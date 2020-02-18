@@ -1,0 +1,55 @@
+.drop-zone {
+  height: 350px;
+  border: 2px dashed #f16624;
+  border-radius: 8px;
+  background-color: white;
+
+  .flex-container {
+    height: 318px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    font-weight: 200;
+  }
+
+  &.hovering {
+    border: 2px solid #f16624;
+    background-color: #f0f0f0;
+  }
+
+  #file-input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+}
+
+.progress-container {
+  width: 100%;
+}
+
+progress {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #eee;
+  border-radius: 2px;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+progress::-webkit-progress-value {
+  transition: width 0.1s ease;
+}
+
+progress[value]::-webkit-progress-bar {
+  background-color: #eee;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+  border: none
+}
+

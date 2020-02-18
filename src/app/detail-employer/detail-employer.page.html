@@ -1,0 +1,99 @@
+<app-nav-bar></app-nav-bar>
+<ion-content>
+  <div class="col statebar" style="background-color: #F29E2E;">
+    <div class="status-bar statebar">
+      <div class="row" style="width: 90%; margin: auto;">
+        <div class="col statebar" style="display: flex; align-items: center;">
+          <h3 style="color: white;">{{jobTitle}}</h3>
+        </div>
+        <div class="col statebar">
+          <div class="button-bar">
+            <!-- <button type="button" class="btn btn-outline-light btn-sm" (click)="goEdit()">Edit</button> -->
+            <!-- <button type="button" class="btn btn-outline-light btn-sm" (click)="goModal(myjobtitle)">View</button> -->
+            <button type="button" class="btn btn-outline-danger btn-sm" (click)="goClose()">Close Job</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="status-body"
+    style="margin-top: 20px; margin-bottom: 20px; max-width: 90%; margin:30px auto; margin-bottom: 300px;">
+    <div class="icon-bar" style="margin-bottom: 20px;">
+      <a [style.background]="state==0?'#F29E2E':'#3a3131c4'" (click)="inbox()" id="indox">Inbox - <i
+          class="fas fa-user-friends"></i></a>
+      <a [style.background]="state==1?'#F29E2E':'#3a3131c4'" (click)="list1()" id="list1">Shortlist1 - <i
+          class="fas fa-user-edit"></i></a>
+      <a [style.background]="state==2?'#F29E2E':'#3a3131c4'" (click)="list2()" id="list2">Shortlist2 - <i
+          class="fas fa-user-clock"></i></a>
+      <a [style.background]="state==3?'#F29E2E':'#3a3131c4'" (click)="list3()" id="list3">Shortlist3 - <i
+          class="fas fa-user-check"></i></a>
+      <a [style.background]="state==4?'#F29E2E':'#3a3131c4'" (click)="hired()" id="hire">Hired - <i
+          class="fa fa-star"></i></a>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card bg-light text-dark">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-md-2" style="margin: auto; text-align: center;">
+                <label style="margin-bottom: 0px;">Candidates</label>
+              </div>
+              <div class="col-md-10">
+                <div class="input-group input-group-sm">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fas fa-search"></i></span>
+                  </div>
+                  <input type="text" class="form-control" aria-label="Small" [(ngModel)]="searchkey"
+                    aria-describedby="inputGroup-sizing-sm" placeholder="Search keyworkds...">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row" style="font-weight: bold; text-align: center; margin-bottom: 20px;">
+              <div class="col">Candidate</div>
+              <div class="col">Work Experience</div>
+              <div class="col">Education</div>
+              <div class="col">Major</div>
+              <div class="col">Chat</div>
+              <div class="col">Select</div>
+            </div>
+            <div *ngIf="searchkey !==''">
+              <div *ngFor="let item of appliedData | filter: searchkey">
+                <div class="row" style="text-align: center; margin-top: 10px;">
+                  <div class="col">{{item.name?item.name:''}}</div>
+                  <div class="col">{{item.workExperience?item.workExperience[0].company:''}}</div>
+                  <div class="col">{{item.degrees[0].school}}</div>
+                  <div class="col">{{item.degrees[0].majors[0]}}</div>
+                  <div class="col" style="text-align: center;">
+                    <button type="button" class="btn btn-outline-primary btn-sm" (click)="goChat(item.sid)">Chat</button>
+                  </div>
+                  <div class="col" style="align-items: center;">
+                    <button type="button" class="btn btn-primary btn-sm"
+                      (click)="goSelect(item.aid)">select</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="inboxe" style="text-align: center;">
+              <app-inbox [student]="appliedData"></app-inbox>
+            </div>
+            <div *ngIf="list1e" style="text-align: center;">
+              <app-selectlist1 [student]="appliedData"></app-selectlist1>
+            </div>
+            <div *ngIf="list2e" style="text-align: center;">
+              <app-selectlist2 [student]="appliedData"></app-selectlist2>
+            </div>
+            <div *ngIf="list3e" style="text-align: center;">
+              <app-selectlist3 [student]="appliedData"></app-selectlist3>
+            </div>
+            <div *ngIf="hirede" style="text-align: center;">
+              <app-hired [student]="appliedData"></app-hired>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</ion-content>

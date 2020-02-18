@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-toolbar class="ion-padding-horizontal big-toolbar">
+        <ion-buttons [slot]="platform.is('mobile') ? '' : 'start'" [class.logo-grid]="platform.is('mobile')">
+            <ion-menu-button></ion-menu-button>
+            <a class="ion-padding-horizontal" routerLink="/">
+                <img src="../../../assets/icons/icon-72.png" alt="Tollab Orange Logo" class="logo"
+                    [class.mobile]="platform.is('mobile')">
+            </a>
+            <div *ngIf="platform.is('mobile')"></div>
+        </ion-buttons>
+        <ion-buttons slot="end" *ngIf="!platform.is('mobile')">
+            <a class="ion-padding-horizontal" routerLink="/jobs">{{ 'navBar.jobsAndInt' | translate}}</a>
+            <!-- <a class="ion-padding-horizontal" routerLink="/companies"
+                *ngIf="authService.currentUser | async">{{'navBar.companies' | translate}}</a> -->
+            <a class="ion-padding-horizontal" routerLink="/coming-soon">{{'navBar.roadMap' | translate}}</a>
+            <a class="ion-padding-horizontal" routerLink="/chat"
+                [queryParams]="{userName: '', myID: this.authService.currentUserInstance.uid}"
+                *ngIf="authService.currentUser | async">{{'navBar.messages' | translate}}</a>
+
+            <div *ngIf="authService.currentUser | async as user else signup">
+            </div>
+            <ng-template #signup>
+                <a class="ion-padding-horizontal" routerLink="/signup-employer">{{'navBar.signup' | translate}}</a>
+            </ng-template>
+            <div class="dropdown-button" *ngIf="authService.currentUser | async as user else login"
+                (click)="onPresentPopover($event)">
+                <a class="ion-padding-horizontal"
+                    *ngIf="authService.currentUserData">{{ ('navBar.hey' | translate) + authService.currentUserData.name.firstName }}</a>
+                <ion-avatar>
+                    <img [src]="user.photoURL" alt="User Avatar" />
+                </ion-avatar>
+            </div>
+            <ng-template #login>
+                <ion-button fill="clear" strong="true" color="primary" size="large" text-capitalize="false"
+                    (click)="onDisplayLoginModal()">{{'logIn.logIn' | translate}}
+                </ion-button>
+            </ng-template>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>

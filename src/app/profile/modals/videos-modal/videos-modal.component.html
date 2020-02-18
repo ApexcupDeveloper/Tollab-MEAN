@@ -1,0 +1,32 @@
+<ion-grid class="ion-padding modal-content" [formGroup]="form">
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">{{ 'profile.modals.videos.youtubeURL' | translate }}</ion-label>
+                <ion-input formControlName="url" type="url"></ion-input>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">{{ 'profile.modals.videos.description' | translate }}</ion-label>
+                <ion-textarea formControlName="description" (ionFocus)="textarea.autoGrow = true"
+                              #textarea></ion-textarea>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row padding justify-content-between>
+        <ion-col size="auto">
+            <ion-buttons>
+                <ion-button color="danger" *ngIf="editMode" (click)="onDelete()">{{ 'profile.modals.videos.delete' | translate }}</ion-button>
+            </ion-buttons>
+        </ion-col>
+        <ion-col size="auto">
+            <ion-buttons>
+                <ion-button color="primary" (click)="onCancel()">{{ 'profile.modals.videos.cancel' | translate }}</ion-button>
+                <ion-button color="primary" (click)="onSave()" [disabled]="form.invalid">{{ 'profile.modals.videos.save' | translate }}</ion-button>
+            </ion-buttons>
+        </ion-col>
+    </ion-row>
+</ion-grid>

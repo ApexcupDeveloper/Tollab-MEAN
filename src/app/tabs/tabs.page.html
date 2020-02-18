@@ -1,0 +1,31 @@
+<ion-tabs>
+
+    <!--    <ion-tab-bar slot="bottom" *ngIf="platform.is('mobile')">-->
+    <ion-tab-bar slot="bottom" *ngIf="false">
+        <ion-tab-button tab="home">
+            <ion-icon name="home"></ion-icon>
+            <ion-label>{{ 'tabs.home.tabName' | translate }}</ion-label>
+        </ion-tab-button>
+
+        <!-- TODO: Re-add later.-->
+        <!-- <ion-tab-button tab="chat">
+            <ion-badge color="danger" *ngIf="messagesNo > 0">{{ messagesNo < 100 ? messagesNo : '99+' }}</ion-badge>
+            <ion-icon name="chatboxes"></ion-icon>
+            <ion-label>{{ 'tabs.chat.tabName' | translate }}</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="notifications">
+            <ion-badge color="danger"
+                       *ngIf="notificationNo > 0">{{ notificationNo < 100 ? notificationNo : '99+' }}</ion-badge>
+            <ion-icon name="notifications"></ion-icon>
+            <ion-label>{{ 'tabs.notifications.tabName' | translate }}</ion-label>
+        </ion-tab-button> -->
+        
+
+        <ion-tab-button tab="profile" *ngIf="authService.currentUser | async">
+            <ion-icon name="person"></ion-icon>
+            <ion-label>{{ 'tabs.profile.tabName' | translate }}</ion-label>
+        </ion-tab-button>
+    </ion-tab-bar>
+
+</ion-tabs>

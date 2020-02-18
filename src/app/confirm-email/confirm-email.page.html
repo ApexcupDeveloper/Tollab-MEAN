@@ -1,0 +1,33 @@
+<app-nav-bar></app-nav-bar>
+<ion-content>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6" style="text-align: center;">
+        <div>
+          <img src="../../assets/logo/logo_transparent_background.png" style="width: 80px; margin: 30px auto;">
+        </div>
+        <div>
+          <h5>Great! You've successfully signed up for Tollab.</h5>
+        </div>
+        <div style="margin-top: 30px;">
+          <p>We've sent you a link to confirm your email address. Please check your inbox. It could take up to 10
+            minutes
+            to show up in your inbox.</p>
+        </div>
+      </div>
+      <div class="col-md-6" style="text-align: left;">
+        <p style="margin-top: 30px;"><strong>Didn't receive the email?</strong></p>
+        <p class="order">1. Is <a href="/">{{currentEmail}}</a> your correct email without typos? If not, <a routerLink="/signup-employer">you can restart the sign up
+          process</a></p>
+        <p class="order">2. Check your spam folder</p>
+        <p class="order">3. Add <a href="/company-add"> info@tollab.me</a> to your contacts</p>
+        <p class="order">4. Click <a (click)="resend()">here</a> to resend the email</p>
+
+        <p style="margin-top: 20px;">Still having trouble?</p>
+        <a href="/contactus" style="margin-right: 50px;">Contact us</a>
+        <a href="/company-add"><button class="btn btn-primary btn-sm">Continue</button></a>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</ion-content>

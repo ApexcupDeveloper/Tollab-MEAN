@@ -1,0 +1,18 @@
+ion-header {
+  ion-toolbar {
+    --ion-toolbar-background: white;
+    --ion-toolbar-color: black;
+    --border-width: 0;
+  }
+}
+
+ion-slides {
+  background-color: white;
+   ion-slide {
+     #digits-container {
+       ion-input {
+         text-align: center;
+       }
+     }
+   }
+}

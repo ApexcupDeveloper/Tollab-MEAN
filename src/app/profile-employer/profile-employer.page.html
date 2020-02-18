@@ -1,0 +1,126 @@
+<app-nav-bar></app-nav-bar>
+<ion-content>
+    <ion-grid class="top-container" style="min-height: 250px;">
+        <ion-row class="ion-justify-content-center ion-align-items-center">
+            <ion-col size="10" sizeSm="12" sizeXs="12">
+                <ion-grid *ngIf="(authService.currentUser | async) || {displayName: 'misc.guest',
+                                        photoURL: 'assets/svg/iconfinder_male3_403019.svg'} as user">
+                    <ion-row class="ion-padding-bottom top-row">
+                        <ion-col class="ion-padding-end ion-text-center user-avatar-column" size="auto">
+                            <div class="avatar-container">
+                                <ion-avatar class="user-avatar">
+                                    <img [src]="user.photoURL ? user.photoURL : 'assets/svg/iconfinder_male3_403019.svg'"
+                                        alt="Profile Image">
+                                </ion-avatar>
+                                <div class="picture-upload" (click)="onDisplayModal('image')">
+                                    <ion-icon name="camera"></ion-icon>
+                                    {{ 'profile.changePicture' | translate }}
+                                </div>
+                            </div>
+                            <!-- TODO: Re-add the button here and decide if it is for uploading or downloading. -->
+                            <!--<ion-button margin-vertical color="light" mode="ios">
+                                <ion-icon name="clipboard" slot="start"></ion-icon>
+                                <span>Upload Resume</span>
+                            </ion-button>-->
+                        </ion-col>
+                        <ion-col class="ion-no-padding ion-padding-start">
+                            <div>
+                                <h1>{{this.fullname}}</h1>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <div class="container">
+        <div class="card" style="margin: 20px;">
+            <div class="card-header" style="background-color: #F29E2E;">
+                <h4 style="color: white; margin: auto;">My Info</h4>
+            </div>
+            <div class="card-body" style="text-align: center;">
+                <div class="row">
+                    <div class="col">
+                        <h5>My Fields</h5>
+                        <span *ngIf="this.agriculture" class="label info">{{this.agriculture}}</span>
+                        <span *ngIf="this.art" class="label info">{{art}}</span>
+                        <span *ngIf="this.business" class="label info">{{business}}</span>
+                        <span *ngIf="this.civics" class="label info">{{civics}}</span>
+                        <span *ngIf="this.communications" class="label info">{{communications}}</span>
+                        <span *ngIf="this.computer" class="label info">{{computer}}</span>
+                        <span *ngIf="this.education" class="label info">{{education}}</span>
+                        <span *ngIf="this.engineering" class="label info">{{engineering}}</span>
+                        <span *ngIf="this.general" class="label info">{{general}}</span>
+                        <span *ngIf="this.health" class="label info">{{health}}</span>
+                        <span *ngIf="this.life" class="label info">{{life}}</span>
+                        <span *ngIf="this.math" class="label info">{{math}}</span>
+                        <span *ngIf="this.natural" class="label info">{{natural}}</span>
+                        <span *ngIf="this.social" class="label info">{{social}}</span>
+                    </div>
+                    <div class="col">
+                        <h5>My Phone</h5>
+                        <span class="label info">{{phone}}</span>
+                    </div>
+                    <div class="col">
+                        <h5>School</h5>
+                        <span class="label info">{{school}}</span>
+                    </div>
+                    <div class="col">
+                        <h5>Graduate Year</h5>
+                        <span class="label info">{{year}} years</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card" style="margin: 20px; margin-bottom: 100px;">
+            <div class="card-header" style="background-color: #F29E2E;">
+                <div class="row">
+                    <div class="col-md-1">
+                        <img src="{{logoURL}}" style="width: 50px;">
+                    </div>
+                    <div class="col-md-11" style=" margin: auto;">
+                        <h4 style="color: white;margin-bottom: 0;">Company Info</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body" style="text-align: center;">
+                <div class="row">
+                    <div class="col">
+                        <img src="{{bannerURL}}" style="width:100%; height: 250px; background-position: center;">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h5>Name</h5>
+                        <span class="label info">{{com_name}}</span>
+                    </div>
+                    <div class="col">
+                        <h5>Location</h5>
+                        <span class="label info">{{com_location}}</span>
+                    </div>
+                    <div class="col">
+                        <h5>Size</h5>
+                        <span class="label info">{{com_size}}</span>
+                    </div>
+                    <div class="col">
+                        <h5>Email</h5>
+                        <span class="label info">{{com_email}}</span>
+                    </div>
+                    <div class="col">
+                        <h5>Website</h5>
+                        <span class="label info">{{com_website}}</span>
+                    </div>
+                </div>
+                <div class="row" style="height: 1px; width:70%;  background-color: gray;margin: auto; margin-top: 20px; margin-bottom: 10px;"></div>
+                <div class="row">
+                    <div class="col">
+                        <h5>About Us</h5>
+                            <span class="label info">{{com_description}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-footer></app-footer>
+</ion-content>

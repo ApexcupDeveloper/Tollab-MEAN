@@ -1,0 +1,13 @@
+
+<div class="row" *ngFor="let item of appliedData" style="width: 100%;">
+  <div class="col" style="padding-left: 0;">{{item.name?item.name:''}}</div>
+  <div class="col">{{item.workExperience?item.workExperience[0].company:''}}</div>
+  <div class="col">{{item.degrees[0].school}}</div>
+  <div class="col">{{item.degrees[0].majors[0]}}</div>
+  <div class="col" style="text-align: center; padding-left: 30px;">
+   <button type="button" class="btn btn-outline-primary btn-sm" (click)="goChat(item.sid)">Chat</button>
+  </div>
+  <div class="col" style="align-items: center;">
+    <button type="button" class="btn btn-primary btn-sm" (click)="goSelect(item.aid)">Select</button>
+  </div>
+</div>

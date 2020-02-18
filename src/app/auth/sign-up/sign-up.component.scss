@@ -1,0 +1,50 @@
+ion-header {
+  ion-toolbar {
+    --ion-toolbar-background: white;
+    --ion-toolbar-color: black;
+    --border-width: 0;
+  }
+}
+
+ion-slides {
+  background-color: white;
+
+  ion-slide {
+
+    .option-avatar, ion-card {
+      margin-top: 50px;
+    }
+
+      .option-avatar {
+        ion-avatar {
+          cursor: pointer;
+          box-shadow: -2px 4px 7px 3px lightgray;
+          width: 128px;
+          height: 128px;
+          margin-bottom: 10px;
+          position: relative;
+          margin-left: auto;
+          margin-right: auto;
+
+          img {
+            width: 128px;
+            height: 128px;
+          }
+
+          ion-badge {
+            border-radius: 50%;
+            border: 1px solid white;
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 50;
+
+            ion-icon {
+              width: 28px;
+              height: 28px;
+            }
+          }
+        }
+      }
+  }
+}

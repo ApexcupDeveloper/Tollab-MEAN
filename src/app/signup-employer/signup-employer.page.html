@@ -1,0 +1,59 @@
+<app-nav-bar></app-nav-bar>
+
+<ion-content>
+  <div class="container card bg-light text-dark">
+    <div class="row">
+      <div class="col">
+        <h5>Sign up as an Employer</h5>
+        <br>
+        <br>
+        <form class="was-validated" method="post" name="singup_form"  novalidate
+          oninput='cpswd.setCustomValidity(cpswd.value != pswd.value ? "Passwords do not match." : "")'>
+          <div class="row">
+            <div class="form-group col">
+              <label for="uname">First Name:</label>
+              <input type="text" class="form-control" [(ngModel)]="e_firstname" [ngModelOptions]="{standalone: true}"
+                id="uname" placeholder="Enter firstname" name="uname" required>
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+            <div class="form-group col">
+              <label for="uname">Last Name:</label>
+              <input type="text" class="form-control" [(ngModel)]="e_lastname" [ngModelOptions]="{standalone: true}"
+                id="uname" placeholder="Enter lastname" name="uname" required>
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="uname">Email:</label>
+            <input type="Email" class="form-control" [(ngModel)]="e_email" [ngModelOptions]="{standalone: true}"
+              id="email" placeholder="Email" name="uname" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Please fill out this field.</div>
+          </div>
+          <div class="row">
+            <div class="form-group col">
+              <label for="pwd">Password:</label>
+              <input type="password" class="form-control" pattern=".{7,}" required title="7 characters minimum"
+                [(ngModel)]="e_password" [ngModelOptions]="{standalone: true}" ng-minlength="7" id="pwd"
+                placeholder="Enter password" name="pswd" required>
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Min length is 7 characters.</div>
+            </div>
+            <div class="form-group col">
+              <label for="pwd">Confirm Password:</label>
+              <input type="password" class="form-control" pattern=".{7,}" required title="7 characters minimum"
+                [(ngModel)]="e_password2" [ngModelOptions]="{standalone: true}" ng-minlength="7" id="pwd"
+                placeholder="Confirm password" name="cpswd" required>
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Min length is 7 characters.</div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" (click)="goSignup()" style="float: right;">Sign up</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</ion-content>

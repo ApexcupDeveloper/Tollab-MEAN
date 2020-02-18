@@ -1,0 +1,41 @@
+<ion-grid class="ion-padding modal-content" [formGroup]="form">
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">{{ 'profile.modals.awards.title' | translate }}</ion-label>
+                <ion-input formControlName="title"></ion-input>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">{{ 'profile.modals.awards.date' | translate }}</ion-label>
+                <ion-datetime formControlName="date"
+                              [max]="profileDataService.today | date:'yyyy-MM-dd'"></ion-datetime>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">{{ 'profile.modals.awards.details' | translate }}</ion-label>
+                <ion-textarea formControlName="details" (ionFocus)="textarea.autoGrow = true"
+                              #textarea></ion-textarea>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row padding justify-content-between>
+        <ion-col size="auto">
+            <ion-buttons>
+                <ion-button color="danger" *ngIf="editMode" (click)="onDelete()">Delete</ion-button>
+            </ion-buttons>
+        </ion-col>
+        <ion-col size="auto">
+            <ion-buttons>
+                <ion-button color="primary" (click)="onCancel()">{{ 'profile.modals.awards.cancel' | translate }}</ion-button>
+                <ion-button color="primary" (click)="onSave()" [disabled]="form.invalid">Save</ion-button>
+            </ion-buttons>
+        </ion-col>
+    </ion-row>
+</ion-grid>

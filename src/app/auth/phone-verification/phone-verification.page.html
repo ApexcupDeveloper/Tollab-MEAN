@@ -1,0 +1,122 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="end">
+            <ion-button (click)="modalCtrl.dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-grid class="ion-padding modal-content">
+    <ion-row>
+        <ion-col>
+            <ion-slides [options]="slideOpts">
+                <ion-slide>
+                    <ion-grid>
+                        <ion-row align-items-center>
+                            <ion-col>
+                                <h1>{{ 'signUp.phoneNumber.title' | translate}}</h1>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row margin-vertical align-items-center>
+                            <ion-col>
+                                <ion-card>
+                                    <ion-card-content>
+                                        <ion-item>
+                                            <ion-input type="tel" clear-input dir="ltr" placeholder="e.g. 0591234567"
+                                                       [formControl]="phoneNumber"></ion-input>
+                                        </ion-item>
+                                    </ion-card-content>
+                                </ion-card>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row align-items-center>
+                            <ion-col>
+                                <ion-button class="big-button" shape="round" size="large" expand="block"
+                                            (click)="onSendVerificationCode()"
+                                            [disabled]="phoneNumber.invalid">{{ 'misc.next' | translate }}
+                                </ion-button>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col>
+                                <div id="recaptcha-container"></div>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-slide>
+                <ion-slide>
+                    <ion-grid>
+                        <ion-row align-items-center>
+                            <ion-col>
+                                <h1>{{ 'signUp.verification.title' | translate }}</h1>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row margin-vertical align-items-center>
+                            <ion-col>
+                                <ion-card>
+                                    <ion-card-content>
+                                        <ion-item id="digits-container" dir="ltr" [formGroup]="verificationNumber">
+                                            <ion-item>
+                                                <ion-input type="number" formControlName="firstDigit" dir="ltr"
+                                                           clear-on-edit
+                                                           (ionInput)="onSelectNextDigitInput(secondDigit)"
+                                                           #firstDigit></ion-input>
+                                            </ion-item>
+                                            <ion-item>
+                                                <ion-input type="number" formControlName="secondDigit" dir="ltr"
+                                                           clear-on-edit
+                                                           (ionInput)="onSelectNextDigitInput(thirdDigit)"
+                                                           (keydown.backspace)="onSelectPrevDigitInput(firstDigit)"
+                                                           #secondDigit></ion-input>
+                                            </ion-item>
+                                            <ion-item>
+                                                <ion-input type="number" formControlName="thirdDigit" dir="ltr"
+                                                           clear-on-edit
+                                                           (ionInput)="onSelectNextDigitInput(fourthDigit)"
+                                                           (keydown.backspace)="onSelectPrevDigitInput(secondDigit)"
+                                                           #thirdDigit></ion-input>
+                                            </ion-item>
+                                            <ion-item>
+                                                <ion-input type="number" formControlName="fourthDigit" dir="ltr"
+                                                           clear-on-edit
+                                                           (ionInput)="onSelectNextDigitInput(fifthDigit)"
+                                                           (keydown.backspace)="onSelectPrevDigitInput(thirdDigit)"
+                                                           #fourthDigit></ion-input>
+                                            </ion-item>
+                                            <ion-item>
+                                                <ion-input type="number" formControlName="fifthDigit" dir="ltr"
+                                                           clear-on-edit
+                                                           (ionInput)="onSelectNextDigitInput(sixthDigit)"
+                                                           (keydown.backspace)="onSelectPrevDigitInput(fourthDigit)"
+                                                           #fifthDigit></ion-input>
+                                            </ion-item>
+                                            <ion-item>
+                                                <ion-input type="number" formControlName="sixthDigit" dir="ltr"
+                                                           clear-on-edit
+                                                           (keydown.backspace)="onSelectPrevDigitInput(fifthDigit)"
+                                                           #sixthDigit></ion-input>
+                                            </ion-item>
+                                        </ion-item>
+                                    </ion-card-content>
+                                </ion-card>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row align-items-center>
+                            <ion-col>
+                                <ion-label>00:{{ timer | number:'2.0-0' }}</ion-label>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col>
+                                <ion-button fill="clear" [disabled]="timer > 0" (click)="resendCode()">
+                                    {{ 'signUp.verification.resend' | translate }}</ion-button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-slide>
+            </ion-slides>
+        </ion-col>
+    </ion-row>
+</ion-grid>

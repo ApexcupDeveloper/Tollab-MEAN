@@ -1,0 +1,73 @@
+<ion-content>
+    <ion-grid [formGroup]="jobCreation">
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label position="floating">{{ formLabelsRef + 'title' | translate }}</ion-label>
+                    <ion-input formControlName="title"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label position="floating">{{ formLabelsRef + 'description' | translate }}</ion-label>
+                    <ion-textarea formControlName="description"></ion-textarea>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label position="floating">{{ formLabelsRef + 'applicationUntil.date' | translate }}</ion-label>
+                    <ion-datetime formControlName="applicationsDueDate"></ion-datetime>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">{{ formLabelsRef + 'applicationUntil.time' | translate }}</ion-label>
+                    <ion-datetime displayFormat="h:mm A" formControlName="applicationsDueTime"></ion-datetime>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label position="floating">{{ formLabelsRef + 'payment' | translate }}</ion-label>
+                    <ion-input type="number" formControlName="payment"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label position="floating">{{ formLabelsRef + 'skills' | translate }}</ion-label>
+                    <ionic-selectable [items]="skills" [isMultiple]="true" [canSearch]="true"
+                                      formControlName="requiredSkills"
+                                      (onSearchSuccess)="$event.component.hideAddItemTemplate()"
+                                      (onSearchFail)="onShowAddSkillForm($event)">
+                        <ng-template ionicSelectableAddItemTemplate let-skill="item" let-isAdd="isAdd">
+                            <ion-item>
+                                "{{ selectableComponent.searchText }}" is not found. Add skill?
+                            </ion-item>
+                            <ion-footer>
+                                <ion-toolbar>
+                                    <ion-row>
+                                        <ion-col>
+                                            <ion-button no-margin expand="full" (click)="onAddSkill()">Add Skill
+                                            </ion-button>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-toolbar>
+                            </ion-footer>
+                        </ng-template>
+                    </ionic-selectable>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row align-items-end margin-top>
+            <ion-col>
+                <ion-button expand="block" [disabled]="jobCreation.invalid"
+                            (click)="onCreateJob()">{{ formLabelsRef + 'publish' | translate }}</ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

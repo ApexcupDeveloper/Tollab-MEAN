@@ -1,0 +1,16 @@
+<!-- <div *ngIf="percentage | async">
+  <progress [value]="pct" max="100"></progress>
+  {{pct | number}}%
+</div> -->
+<div *ngIf="endflag">
+  <div *ngIf="snapshot | async as snap">
+    loading...
+    <!-- {{snap.bytesTransferred}} of {{snap.totalBytes}} -->
+    <div *ngIf="downloadURL as url">
+      <span  style="color: rgba(7, 117, 53, 0.945);">The image was uploaded successfully.</span >
+      <!-- <h3>Results!</h3> -->
+      <!-- <img src="{{url}}"><br>
+      <a href="{{url}}" target="_blank" rel="noopener">Download Me!</a> -->
+    </div>
+  </div>
+</div>

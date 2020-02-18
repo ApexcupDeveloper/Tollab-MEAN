@@ -1,0 +1,38 @@
+.btn{
+    margin: 5px;
+}
+.button-bar{
+    float: right;
+    padding: 51px 0;
+}
+.icon-bar {
+    width: 100%;
+    background-color: #555;
+    overflow: auto;
+  }
+  
+  .icon-bar a {
+    float: left;
+    width: 20%;
+    text-align: center;
+    padding: 12px 0;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 36   px;
+  }
+  
+  .icon-bar a:hover {
+    background-color: #3a3131c4;
+  }
+  .active {
+    background-color: #F29E2E;
+  }  
+  .selector{
+    font-size: 25px;
+    background-color: #F29E2E; 
+    color: white; 
+    border-width: 0px;
+  }
+.statebar {
+  height: 100px;
+}

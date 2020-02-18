@@ -1,0 +1,58 @@
+<ion-grid class="ion-padding modal-content" [formGroup]="form">
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">{{ 'profile.modals.leadership.org' | translate }}</ion-label>
+                <ion-input formControlName="organization"></ion-input>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">{{ 'profile.modals.leadership.title' | translate }}</ion-label>
+                <ion-input formControlName="title"></ion-input>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">{{ 'profile.modals.leadership.startDate' | translate }}</ion-label>
+                <ion-datetime formControlName="startDate"
+                              [max]="profileDataService.today | date:'yyyy-MM-dd'"></ion-datetime>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">{{ 'profile.modals.leadership.endDate' | translate }}</ion-label>
+                <ion-datetime formControlName="endDate"
+                              [max]="profileDataService.twentyYearsLater | date:'yyyy-MM-dd'"></ion-datetime>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">{{ 'profile.modals.leadership.details' | translate }}</ion-label>
+                <ion-textarea formControlName="details" (ionFocus)="textarea.autoGrow = true"
+                              #textarea></ion-textarea>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row padding justify-content-between>
+        <ion-col size="auto">
+            <ion-buttons>
+                <ion-button color="danger" *ngIf="editMode" (click)="onDelete()">{{ 'profile.modals.leadership.delete' | translate }}</ion-button>
+            </ion-buttons>
+        </ion-col>
+        <ion-col size="auto">
+            <ion-buttons>
+                <ion-button color="primary" (click)="onCancel()">{{ 'profile.modals.leadership.cancel' | translate }}</ion-button>
+                <ion-button color="primary" (click)="onSave()" [disabled]="form.invalid">{{ 'profile.modals.leadership.save' | translate }}</ion-button>
+            </ion-buttons>
+        </ion-col>
+    </ion-row>
+</ion-grid>

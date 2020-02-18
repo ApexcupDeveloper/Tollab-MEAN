@@ -1,0 +1,51 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="end">
+            <ion-button (click)="modalCtrl.dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-grid class="ion-padding modal-content">
+    <ion-row>
+        <ion-col>
+            <ion-card class="ion-no-margin ion-margin-bottom">
+                <ion-card-header class="ion-no-padding ion-padding-horizontal ion-padding-top">
+                    <ion-card-title>{{ 'logIn.title' | translate }}</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                    <form [formGroup]="logInForm">
+                        <ion-item>
+                            <ion-label position="floating">{{ 'logIn.email' | translate }}</ion-label>
+                            <ion-input clearInput type="email" name="email" formControlName="email">
+                            </ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label position="floating">{{ 'logIn.password' | translate }}</ion-label>
+                            <ion-input clearInput type="password" name="password" formControlName="password">
+                            </ion-input>
+                        </ion-item>
+                        <ion-button margin-top expand="block" color="primary" (click)="onSubmit()"
+                                    [disabled]="logInForm.invalid">{{ 'logIn.logIn' | translate }}
+                        </ion-button>
+                    </form>
+                    <div text-end>
+                        <a class="ion-color-dark" (click)="sendResetPassword()">{{ 'logIn.forgotPassword' | translate }}</a>
+                    </div>
+                </ion-card-content>
+            </ion-card>
+
+            <app-google-log-in></app-google-log-in>
+            <app-facebook-log-in></app-facebook-log-in>
+
+            <div class="line">or</div>
+
+            <ion-button expand="block" (click)="onDisplaySignUp()">
+                <ion-icon name="mail" slot="start"></ion-icon>
+                <ion-label>{{ 'logIn.withEmail' | translate }}</ion-label>
+            </ion-button>
+        </ion-col>
+    </ion-row>
+</ion-grid>

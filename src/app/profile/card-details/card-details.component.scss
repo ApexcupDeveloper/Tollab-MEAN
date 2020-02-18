@@ -1,0 +1,14 @@
+.details {
+  background-color: lightgray;
+  color: black;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  ion-label {
+    overflow: visible;
+    white-space: normal;
+  }
+
+  ion-item {
+    --background: lightgray;
+  }
+}

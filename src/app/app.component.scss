@@ -1,0 +1,21 @@
+// App Styles
+// ----------------------------------------------------------------------------
+// Put style rules here that you want to apply to the entire application. These 
+// styles are for the entire app and not just one component. Additionally, this 
+// file can hold Sass mixins, functions, and placeholder classes to be imported 
+// and used throughout the application.
+
+ion-list.full-height-list {
+  height: 100%;
+  margin-bottom: 0;
+
+  div.bottom-items-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}

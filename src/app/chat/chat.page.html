@@ -1,0 +1,54 @@
+<app-nav-bar></app-nav-bar>
+
+<ion-content padding>
+  <div class="container" style="height: 100%;">
+    <div class="row" style="height: 100%;">
+      <div class="col-md-3"  style="height: 100%;">
+        <div class="userList"  style="height: 100%;">
+          <div class="card"  style="height: 100%;">
+            <div class="card-header">
+              <h4>Messages</h4>
+            </div>
+            <div class="card-body">
+              <!-- <div *ngIf="!flagUser">
+                <div class="user" (click)="selectUser(list.id)">{{youID}}</div>
+              </div> -->
+              <div *ngFor="let list of userNameList , let i=index">
+                <div class="user" (click)="selectUser(i)" [style.background]="list.state?'#F29E2E':'#3a3131c4'">{{list.name.firstName}} {{list.name.lastName}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9" style="height: 100%;">
+        <div id="chatmessage" style="height: 100%;">
+          <div class="card" style="height: 100%;">
+            <div class="card-body">
+              <div *ngFor="let message of messages" class="message">
+                <div [class]="message.flag == 'from' ? 'innerMessage messageRight' : 'innerMessage messageLeft'" style="overflow-y: auto; max-width: 80%;">
+                  <div class="username">{{ message.creatTime | date:'yyyy-MM-dd HH:mm:ss'}}</div>
+                  <div class="message">{{ message.message }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar class="container">
+    <div class="row send-body">
+      <div class="elem col-md-11">
+        <ion-input type="text" [(ngModel)]="message" id="chatting" (keyup.enter)="sendMessage()"></ion-input>
+      </div>
+      <div class="elem col-md-1">
+        <button ion-button icon-only (click)="sendMessage()" style="background-color: #F29E2E; border-radius: 10px;">
+          <i class="fas fa-paper-plane" style="font-size: 25px;"></i>
+        </button>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>
+<!-- <app-footer></app-footer> -->

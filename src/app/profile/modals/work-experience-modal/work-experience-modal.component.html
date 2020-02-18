@@ -1,0 +1,79 @@
+<ion-grid class="ion-padding modal-content" [formGroup]="form">
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">{{ 'profile.modals.workExperience.company' | translate }}</ion-label>
+                <ion-input formControlName="company" [value]="editMode ? data.company : null"></ion-input>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">{{ 'profile.modals.workExperience.position' | translate }}</ion-label>
+                <ion-input formControlName="position" [value]="editMode ? data.position : null"></ion-input>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">{{ 'profile.modals.workExperience.startDate' | translate }}</ion-label>
+                <ion-datetime formControlName="startDate"
+                              [max]="profileDataService.today | date:'yyyy-MM-dd'"
+                              [value]="editMode ? data.startDate : null"></ion-datetime>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label>{{ 'profile.modals.workExperience.currentlyWorking' | translate }}</ion-label>
+                <ion-checkbox formControlName="current"
+                              [value]="editMode ? data.current : null"></ion-checkbox>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row *ngIf="!form.value.current">
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">{{ 'profile.modals.workExperience.endDate' | translate }}</ion-label>
+                <ion-datetime formControlName="endDate"
+                              [value]="editMode && data.hasOwnProperty('endDate') ? data.endDate : null"
+                              [max]="profileDataService.twentyYearsLater | date:'yyyy-MM-dd'"></ion-datetime>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">{{ 'profile.modals.workExperience.website' | translate }}</ion-label>
+                <ion-input formControlName="website"
+                           [value]="editMode && data.hasOwnProperty('website') ? data.website : null"></ion-input>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">{{ 'profile.modals.workExperience.details' | translate }}</ion-label>
+                <ion-textarea formControlName="details" (ionFocus)="textarea.autoGrow = true"
+                              [value]="editMode && data.hasOwnProperty('details') ? data.details : null"
+                              #textarea></ion-textarea>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row padding justify-content-between>
+        <ion-col size="auto">
+            <ion-buttons>
+                <ion-button color="danger" *ngIf="editMode" (click)="onDelete()">{{ 'profile.modals.workExperience.delete' | translate }}</ion-button>
+            </ion-buttons>
+        </ion-col>
+        <ion-col size="auto">
+            <ion-buttons>
+                <ion-button color="primary" (click)="onCancel()">{{ 'profile.modals.workExperience.cancel' | translate }}</ion-button>
+                <ion-button color="primary" (click)="onSave()" [disabled]="form.invalid">{{ 'profile.modals.workExperience.save' | translate }}</ion-button>
+            </ion-buttons>
+        </ion-col>
+    </ion-row>
+</ion-grid>

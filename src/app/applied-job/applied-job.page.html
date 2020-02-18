@@ -1,0 +1,41 @@
+<app-nav-bar></app-nav-bar>
+
+<ion-content >
+  <div class="container" style="margin-top:50px; margin-bottom: 320px;">
+    <div class="card">
+      <div class="card-header" style="padding: 20px;background-color: #F29E2E; color: white;">
+        <h5 style="margin: auto;">My Applied Jobs</h5>
+      </div>
+      <div class="card-body">
+        <div class="row title" style="width: 100%;">
+          <div class="col-md-3" style="padding-left: 0;"><strong>Job Title</strong></div>
+          <div class="col-md-2"><strong>Job Type</strong></div>
+          <div class="col-md-2"><strong>Company Name</strong></div>
+          <div class="col-md-2"><strong>Job Location</strong></div>
+          <div class="col-md-2"><strong>State</strong></div>
+          <div class="col-md-1"><strong>Close</strong></div>
+        </div>
+        <div *ngIf="appliedAllData==''">
+          <h6 style="text-align: center; margin-top: 20px;">There is no any applied job.</h6>
+        </div>
+        <div *ngFor="let job of appliedAllData">
+          <div class="row detail">
+            <div class="col-md-3" style="padding-left: 0; text-align: start;">{{job.item.data_job.job_title}}</div>
+            <div class="col-md-2">{{job.item.data_job.job_type}}</div>
+            <div class="col-md-2">{{job.name}}</div>
+            <div class="col-md-2">{{job.item.data_job.job_location}}</div>
+            <div *ngIf="job.item.data.level==0" class="col-md-2 state"><p style="background-color:Tomato;">No Activate</p></div>
+            <div *ngIf="job.item.data.level==1" class="col-md-2 state"><p style="background-color:Orange;">Activate-1</p></div>
+            <div *ngIf="job.item.data.level==2" class="col-md-2 state"><p style="background-color:Orange;">Activate-2</p></div>
+            <div *ngIf="job.item.data.level==3" class="col-md-2 state"><p style="background-color:Orange;">Activate-3</p></div>
+            <div *ngIf="job.item.data.level==4" class="col-md-2 state"><p style="background-color:MediumSeaGreen;">Hired</p></div>
+            <div class="col-md-1" style="align-items: center;">
+              <button type="button" class="btn btn-primary btn-sm" (click)="goClose(job.item.aplliedID)" >Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<app-footer></app-footer>
+</ion-content >

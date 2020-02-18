@@ -1,0 +1,221 @@
+<app-nav-bar></app-nav-bar>
+
+<ion-content>
+  <div class="container card bg-light text-dark">
+    <div class="row">
+      <div class="col">
+        <h5>Welcome to Tollab</h5>
+        <p>Before continuing, we need a bit more info</p>
+        <div>
+          <label class="form10" for="form10">Phone number</label>
+          <input type="number" [(ngModel)]="e_phone" class="form-control" id="e_number" required />
+        </div>
+        <div>
+          <label class="form10" for="form10">Job Title</label>
+          <input type="text" [(ngModel)]="e_jobtitle" class="form-control" id="job_title" required />
+        </div>
+        <label class="form10" for="form10" style="margin-top: 10px;">Tell us the types of candidates you would like to
+          find</label>
+        <div class="col"
+          style="width: 100%; height: 200px; overflow: auto; border: 1px solid; border-color: rgba(128, 128, 128, 0.459);">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" [(ngModel)]="agriculture" id="agriculture">
+            <label class="custom-control-label" for="agriculture">Agriculture, food&Horiculture</label>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" [(ngModel)]="art" id="art">
+            <label class="custom-control-label" for="art">Arts&Design</label>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" [(ngModel)]="business" id="business">
+            <label class="custom-control-label" for="business">Business, Entreprenership&Human Resources</label>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" [(ngModel)]="civics" id="civics">
+            <label class="custom-control-label" for="civics">Civics&Govornment</label>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" [(ngModel)]="communications" id="communications">
+            <label class="custom-control-label" for="communications">Communications</label>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" [(ngModel)]="computer" id="computer">
+            <label class="custom-control-label" for="computer">Computer Science, Information System&Technology</label>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" [(ngModel)]="education" id="education">
+            <label class="custom-control-label" for="education">Education</label>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" [(ngModel)]="engineering" id="engineering">
+            <label class="custom-control-label" for="engineering">Engineering</label>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" [(ngModel)]="general" id="general">
+            <label class="custom-control-label" for="general">General Studies</label>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" [(ngModel)]="health" id="health">
+            <label class="custom-control-label" for="health">Health Professions</label>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" [(ngModel)]="life" id="life">
+            <label class="custom-control-label" for="life">Life Science</label>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" [(ngModel)]="math" id="math">
+            <label class="custom-control-label" for="math">Math&Physical Sciences</label>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" [(ngModel)]="natural" id="natural">
+            <label class="custom-control-label" for="natural">Natural Resources, Sustainability&Environmental
+              Science</label>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" [(ngModel)]="social" id="social">
+            <label class="custom-control-label" for="social">Social Sciences</label>
+          </div>
+        </div>
+        <label class="form10" for="form10" style="margin-top: 20px;">Add your Alma Mater</label>
+        <div class="row">
+          <div class="col">
+            <label class="form10" for="form10">School Name</label>
+            <input type="text" class="form-control" [(ngModel)]="school" id="school" required  />
+          </div>
+          <div class="col">
+            <label class="form10" for="form10">Graduation Year</label>
+            <input type="number" class="form-control" [(ngModel)]="year" id="year" required  />
+          </div>
+        </div>
+        <div class="col">
+          <ion-button (click)="goGuide()">Next: Employer Guidelines</ion-button>
+        </div>
+      </div>
+      <!-- <div class="divider"></div>
+      <div class="col" style="text-align: center;">
+        <div>
+          <h5>One Trusted, Integrated Network</h5>
+          <br>
+          <p>Recurit top students from over 2100 University partners</p>
+        </div>
+        <div>
+          <div id="slide-logo" class="carousel slide" data-ride="carousel" data-wrap="true" data-interval="3000">
+            <ol class="carousel-indicators">
+              <li data-target="#slide-logo" data-slide-to="0" class="active"></li>
+              <li data-target="#slide-logo" data-slide-to="1"></li>
+              <li data-target="#slide-logo" data-slide-to="2"></li>
+              <li data-target="#slide-logo" data-slide-to="3"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="row" style="width: 100%">
+                  <div class="col">
+                    <img src="../../assets/logo/logo_transparent_background.png" class="rounded" style="width: 50px;">
+                    <label>550k business students</label>
+                  </div>
+                </div>
+                <div class="row" style="width: 100%">
+                  <div class="col">
+                    <img src="../../assets/logo/logo_transparent_background.png" class="rounded" style="width: 50px;">
+                    <label>360k finance students</label>
+                  </div>
+                </div>
+                <div class="row" style="width: 100%">
+                  <div class="col">
+                    <img src="../../assets/logo/logo_transparent_background.png" class="rounded" style="width: 50px;">
+                    <label>245k computer students</label>
+                  </div>
+                </div>
+                <div class="row" style="width: 100%">
+                  <div class="col">
+                    <img src="../../assets/logo/logo_transparent_background.png" class="rounded" style="width: 50px;">
+                    <label>435 consulting students</label>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row" style="width: 100%">
+                  <div class="col">
+                    <img src="../../assets/logo/logo_transparent_background.png" class="rounded" style="width: 50px;">
+                    <label>550k business students</label>
+                  </div>
+                </div>
+                <div class="row" style="width: 100%">
+                  <div class="col">
+                    <img src="../../assets/logo/logo_transparent_background.png" class="rounded" style="width: 50px;">
+                    <label>550k business students</label>
+                  </div>
+                </div>
+                <div class="row" style="width: 100%">
+                  <div class="col">
+                    <img src="../../assets/logo/logo_transparent_background.png" class="rounded" style="width: 50px;">
+                    <label>550k business students</label>
+                  </div>
+                </div>
+                <div class="row" style="width: 100%">
+                  <div class="col">
+                    <img src="../../assets/logo/logo_transparent_background.png" class="rounded" style="width: 50px;">
+                    <label>550k business students</label>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row" style="width: 100%">
+                  <div class="col">
+                    <img src="../../assets/logo/logo_transparent_background.png" class="rounded" style="width: 50px;">
+                    <label>550k business students</label>
+                  </div>
+                </div>
+                <div class="row" style="width: 100%">
+                  <div class="col">
+                    <img src="../../assets/logo/logo_transparent_background.png" class="rounded" style="width: 50px;">
+                    <label>550k business students</label>
+                  </div>
+                </div>
+                <div class="row" style="width: 100%">
+                  <div class="col">
+                    <img src="../../assets/logo/logo_transparent_background.png" class="rounded" style="width: 50px;">
+                    <label>550k business students</label>
+                  </div>
+                </div>
+                <div class="row" style="width: 100%">
+                  <div class="col">
+                    <img src="../../assets/logo/logo_transparent_background.png" class="rounded" style="width: 50px;">
+                    <label>550k business students</label>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row" style="width: 100%">
+                  <div class="col">
+                    <img src="../../assets/logo/logo_transparent_background.png" class="rounded" style="width: 50px;">
+                    <label>550k business students</label>
+                  </div>
+                </div>
+                <div class="row" style="width: 100%">
+                  <div class="col">
+                    <img src="../../assets/logo/logo_transparent_background.png" class="rounded" style="width: 50px;">
+                    <label>550k business students</label>
+                  </div>
+                </div>
+                <div class="row" style="width: 100%">
+                  <div class="col">
+                    <img src="../../assets/logo/logo_transparent_background.png" class="rounded" style="width: 50px;">
+                    <label>550k business students</label>
+                  </div>
+                </div>
+                <div class="row" style="width: 100%">
+                  <div class="col">
+                    <img src="../../assets/logo/logo_transparent_background.png" class="rounded" style="width: 50px;">
+                    <label>550k business students</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+  <app-footer></app-footer>
+</ion-content>

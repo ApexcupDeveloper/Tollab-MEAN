@@ -1,0 +1,83 @@
+<ion-header no-border>
+    <ion-toolbar class="custom-toolbar">
+        <ion-buttons>
+            <ion-back-button defaultHref="/"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding-horizontal>
+    <ion-grid>
+        <ion-row>
+            <ion-col text-center justify-content-center>
+                <ion-avatar
+                        style="width: 5rem; height: 5rem; margin-left: auto; margin-right: auto; margin-bottom: 10px;">
+                    <img alt="My Profile Picture" *ngIf="authService.currentUser | async"
+                         [src]="(authService.currentUser | async).photoURL">
+                </ion-avatar>
+                <ion-label>Majd</ion-label>
+                <br>
+                <br>
+                <div>
+                    <ion-icon name="star" color="warning"></ion-icon>
+                    <ion-icon name="star" color="warning"></ion-icon>
+                    <ion-icon name="star" color="warning"></ion-icon>
+                    <ion-icon name="star-half" color="warning"></ion-icon>
+                    <ion-icon name="star-outline" color="warning"></ion-icon>
+                </div>
+                <br>
+                <div style="border: 1px lightgray solid; border-radius: 18px;" text-center padding>
+                    <ion-text color="success">Available!</ion-text>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row align-items-center justify-content-center>
+            <ion-col id="major-col" class="custom-segment-btn" (click)="onDisplayMajor()" size="auto">
+                <ion-icon name="journal" color="light"></ion-icon>
+            </ion-col>
+            <ion-col id="skills-col" class="custom-segment-btn" (click)="onDisplaySkills()" size="auto">
+                <ion-icon name="list" color="light"></ion-icon>
+            </ion-col>
+            <ion-col id="former-jobs-col" class="custom-segment-btn" (click)="onDisplayFormerJobs()" size="auto">
+                <ion-icon name="code-working" color="light"></ion-icon>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="isMajorActivated">
+            <ion-item-divider>Major</ion-item-divider>
+            <ion-col>
+                <ion-item>Computer Engineering</ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="isSkillsActivated">
+            <ion-col>
+                <ion-item-divider>Skills</ion-item-divider>
+                <ion-list>
+                    <ion-item>Front-End Development</ion-item>
+                    <ion-item>Angular</ion-item>
+                    <ion-item>Fluent English Speaker</ion-item>
+                    <ion-item>Julia Language</ion-item>
+                </ion-list>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="isFormerJobsActivated">
+            <ion-item-divider>Former Jobs</ion-item-divider>
+            <ion-col>
+                <ion-item-divider>Jobs via TollabCo PTJ</ion-item-divider>
+                <ion-item>
+                    Logo Designer
+                </ion-item>
+                <br>
+                <ion-item-divider>Others</ion-item-divider>
+                <ion-item>
+                    Content Maker
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <ion-button expand="full">Connect</ion-button>
+    </ion-toolbar>
+</ion-footer>

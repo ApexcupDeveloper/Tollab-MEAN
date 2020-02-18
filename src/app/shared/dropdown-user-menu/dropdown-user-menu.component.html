@@ -1,0 +1,8 @@
+<div class="dropdown-content ion-text-center">
+  <a routerLink="/profile" *ngIf="authService.currentUserData.role == 'student'" (click)="popoverCtrl.dismiss()">Profile</a>
+  <a routerLink="/profile-company" [queryParams]="{id: this.authService.currentUserInstance.uid}" *ngIf="authService.currentUserData.role == 'employer'" (click)="popoverCtrl.dismiss()">Profile</a>
+  <a routerLink="/post" *ngIf="authService.currentUserData.role == 'employer'" (click)="popoverCtrl.dismiss()">Post a job</a>
+  <a routerLink="/detail-job"*ngIf="authService.currentUserData.role == 'employer'" (click)="popoverCtrl.dismiss()">My Jobs</a>
+  <a routerLink="/applied-job" [queryParams]="{id: this.authService.currentUserInstance.uid}" *ngIf="authService.currentUserData.role == 'student'" (click)="popoverCtrl.dismiss()">Applied Jobs</a>
+  <a (click)="onLogOut()">Logout</a>
+</div>

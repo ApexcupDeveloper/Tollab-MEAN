@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "28900324531",
+    "firebase_url": "https://prototype-app-88747.firebaseio.com",
+    "project_id": "prototype-app-88747",
+    "storage_bucket": "prototype-app-88747.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28900324531:android:2ff2f07bd4d061fd",
+        "android_client_info": {
+          "package_name": "com.tollabco.tollabco"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "28900324531-sed06m6aghv73lafpjvsaiu103mia526.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1Kro5z8eKVzX0V4X5lrhPpk3x6y7l5N4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "28900324531-sed06m6aghv73lafpjvsaiu103mia526.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "28900324531-h5r8jjlcl8m4goh3k79hfrvmketqukml.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tollabco.tollabco"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
